@@ -1,0 +1,19 @@
+{
+  "name": "forum-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run start",
+    "start": "concurrently \"npm run client\" \"npm run server\"",
+    "formatClient": "cd client && npm run format",
+    "formatServer": "cd server && npm run format",
+    "format": "concurrently \"npm run formatClient\" \"npm run formatServer\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
