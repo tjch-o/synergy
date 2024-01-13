@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div>
             {/* <CreatePostPage userId="edca2347-9260-4c15-bb6e-68ef31ea6432" /> */}
-            <SignupPage />
+            <LoginPage />
         </div>
     );
 }

@@ -11,6 +11,7 @@ interface PostProps {
     username: string;
     likeCount: number;
     commentCount: number;
+    comments: Array;
 }
 
 const Post = ({
@@ -20,9 +21,13 @@ const Post = ({
     username,
     likeCount,
     commentCount,
+    comments,
 }: PostProps) => {
     const convertTime = (time: Date) => {
         return new Date(time).toLocaleTimeString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
             hour: "2-digit",
             minute: "2-digit",
             second: "2-digit",
@@ -31,10 +36,12 @@ const Post = ({
     };
 
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white ring-2 ring-purple-200 rotate-3d rotate-x-30 rotate-y-30 rotate-z-30 perspective-500">
             {/* <Image className="w-full" src="/img/card-top.jpg" alt="" /> */}
             <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{title}</div>
+                <div className="font-bold text-xl mb-2 text-blue-600">
+                    {title}
+                </div>
                 <p className="text-gray-700 text-base mb-2">{content}</p>
                 <p className="text-gray-700 text-base mb-2">
                     {" "}
@@ -42,7 +49,10 @@ const Post = ({
                 </p>
                 <div className="flex flex-row">
                     <LikeButton likeCount={likeCount} />
-                    <CommentButton commentCount={commentCount} />
+                    <CommentButton
+                        commentCount={commentCount}
+                        comments={comments}
+                    />
                 </div>
             </div>
         </div>
