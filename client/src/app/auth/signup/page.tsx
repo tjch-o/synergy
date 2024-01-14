@@ -1,7 +1,7 @@
 "use client";
 
-import FailureAlert from "@/components/Alert/FailureAlert";
-import SuccessAlert from "@/components/Alert/SuccessAlert";
+import FailureAlert from "@/components/alerts/FailureAlert";
+import SuccessAlert from "@/components/alerts/SuccessAlert";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -76,7 +76,16 @@ const SignupPage = () => {
                 );
                 window.localStorage.setItem("token", res.data.token);
 
-                router.push("/forum");
+                try {
+                    const res = await axios.get(
+                        "http://localhost:5000/access-forum",
+                    );
+                    if (res.status == 200) {
+                        router.push("/forum");
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
             } else {
                 setCreateAccountStatus(false);
                 setVisible(true);

@@ -1,17 +1,14 @@
 "use client";
 
-import FailureAlert from "@/components/Alert/FailureAlert";
-import SuccessAlert from "@/components/Alert/SuccessAlert";
+import FailureAlert from "@/components/alerts/FailureAlert";
+import SuccessAlert from "@/components/alerts/SuccessAlert";
+import GoBackButton from "@/components/buttons/GoBackButton";
 import axios from "axios";
 import FormData from "form-data";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-interface CreatePostPageProps {
-    userId: string;
-}
-
-const CreatePostPage = ({ userId }: CreatePostPageProps) => {
+const CreatePostPage = () => {
     const [createPostStatus, setCreatePostStatus] = useState(false);
     const [isAlertVisible, setAlertVisible] = useState(false);
     const [message, setMessage] = useState("");
@@ -19,7 +16,7 @@ const CreatePostPage = ({ userId }: CreatePostPageProps) => {
     const router = useRouter();
 
     const urlParams = useParams();
-    const id = urlParams.id;
+    const userId = urlParams.id;
 
     const [postData, setPostData] = useState({
         title: "",
@@ -31,16 +28,18 @@ const CreatePostPage = ({ userId }: CreatePostPageProps) => {
         setPostData((prevData) => ({ ...prevData, [name]: value }));
     };
 
+    const handleGoBack = () => {
+        router.push("/forum");
+    };
+
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
 
         const formData = new FormData();
 
-        console.log(id);
-
         const data = {
             ...postData,
-            userId: id,
+            userId: userId,
             time: Date.now(),
             likeCount: 0,
             commentCount: 0,
@@ -73,7 +72,7 @@ const CreatePostPage = ({ userId }: CreatePostPageProps) => {
 
     return (
         <div>
-            <h1 className="text-3xl">Create Post Page</h1>
+            <h1 className="text-3xl pb-8">Create Post Page</h1>
 
             <form onSubmit={handleSubmit}>
                 <label className="block font-bold">Title</label>
@@ -102,12 +101,16 @@ const CreatePostPage = ({ userId }: CreatePostPageProps) => {
                     onChange={handleChangeInData}
                 ></input> */}
 
-                <button
-                    className="block font-2xl py-2 px-4 bg-blue-800 text-white rounded shadow-md"
-                    type="submit"
-                >
-                    Submit
-                </button>
+                <div className="flex flex-row">
+                    <button
+                        className="block font-2xl py-2 px-4 bg-blue-800 text-white rounded shadow-md"
+                        type="submit"
+                    >
+                        Create Post
+                    </button>
+
+                    <GoBackButton onClick={handleGoBack} />
+                </div>
             </form>
 
             {createPostStatus ? (

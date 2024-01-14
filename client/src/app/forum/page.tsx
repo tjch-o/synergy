@@ -1,8 +1,9 @@
 "use client";
 
-import CreatePostButton from "@/components/CreatePostButton/CreatePostButton";
 import NavBar from "@/components/NavBar/NavBar";
 import Post from "@/components/Post/Post";
+import CreatePostButton from "@/components/buttons/CreatePostButton";
+import LogoutButton from "@/components/buttons/LogoutButton";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -25,15 +26,32 @@ const ForumPage = () => {
     useEffect(() => {
         const fetchPostsData = async () => {
             const res = await axios.get("http://localhost:5000/fetch-posts");
-            setPosts(res.data.posts);
+            setPosts(res.data.postsWithUsernames);
             fetchPostsData();
         };
 
         fetchPostsData();
     }, []);
 
-    const onClick = () => {
-        router.push(`/forum/create-post/${userId}`);
+    const onClick = async () => {
+        try {
+            const res = await axios.get(
+                "http://localhost:5000/access-create-post",
+                {
+                    validateStatus: (status) => {
+                        return status < 500 || status == 401 || status == 403;
+                    },
+                },
+            );
+            console.log(res.status);
+            if (res.status == 200) {
+                router.push(`/forum/create-post/${userId}`);
+            } else {
+                router.push("/auth/login");
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -53,7 +71,7 @@ const ForumPage = () => {
                             title={post.title}
                             content={post.content}
                             time={post.time}
-                            username={username}
+                            username={post.username}
                             likeCount={post.likeCount}
                             commentCount={post.commentCount}
                             comments={post.comments}
@@ -62,6 +80,7 @@ const ForumPage = () => {
                 })}
             </div>
             <CreatePostButton onClick={onClick} />
+            <LogoutButton />
         </div>
     );
 };

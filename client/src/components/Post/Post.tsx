@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import CommentButton from "../CommentButton/CommentButton";
-import LikeButton from "../LikeButton/LikeButton";
+import CommentButton from "../buttons/CommentButton";
+import LikeButton from "../buttons/LikeButton";
 
 interface PostProps {
     title: string;

@@ -1,4 +1,4 @@
-import CreatePostIcon from "./CreatePostIcon";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 
 interface CreatePostButtonProps {
     onClick: () => void;
@@ -11,7 +11,7 @@ const CreatePostButton = ({ onClick }: CreatePostButtonProps) => {
                 className="bg-[#603fef] py-2 px-4 rounded text-white"
                 onClick={onClick}
             >
-                <CreatePostIcon />
+                <PostAddIcon fontSize="medium" />
                 &nbsp; Add Post
             </button>
         </div>

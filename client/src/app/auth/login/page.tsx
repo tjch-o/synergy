@@ -1,7 +1,7 @@
 "use client";
 
-import FailureAlert from "@/components/Alert/FailureAlert";
-import SuccessAlert from "@/components/Alert/SuccessAlert";
+import FailureAlert from "@/components/alerts/FailureAlert";
+import SuccessAlert from "@/components/alerts/SuccessAlert";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -46,10 +46,22 @@ const LoginPage = () => {
                     res.data.loggedUsername,
                 );
                 window.localStorage.setItem("token", res.data.token);
-                console.log(res.data.loggedUsername);
-                console.log(res.data.loggedUserId);
 
-                router.push("/forum");
+                axios.interceptors.request.use((config) => {
+                    config.headers.authorization = `Bearer ${res.data.token}`;
+                    return config;
+                });
+
+                try {
+                    const res = await axios.get(
+                        "http://localhost:5000/access-forum",
+                    );
+                    if (res.status == 200) {
+                        router.push("/forum");
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
             } else {
                 setLoginStatus(false);
                 setVisible(true);
