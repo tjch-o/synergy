@@ -18,8 +18,6 @@ const createPost = async (req, res) => {
         comments: comments,
     });
 
-    console.log(newPost);
-
     try {
         await newPost.save();
         res.status(200).json({ message: "Post created successfully." });

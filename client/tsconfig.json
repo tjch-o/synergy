@@ -27,9 +27,9 @@
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts",
-        "src/components/NavBar/NavBar.tsx",
-        "src/components/Logo/NavBarLogo.tsx",
-        "src/components/Logo/Logo.tsx"
+        "src/components/navbar/NavBar.tsx",
+        "src/components/logo/NavBarLogo.tsx",
+        "src/components/logo/Logo.tsx"
     ],
     "exclude": ["node_modules"]
 }

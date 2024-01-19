@@ -1,9 +1,9 @@
 "use client";
 
-import NavBar from "@/components/NavBar/NavBar";
-import Post from "@/components/Post/Post";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import LogoutButton from "@/components/buttons/LogoutButton";
+import NavBar from "@/components/navbar/NavBar";
+import Post from "@/components/post/Post";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -75,6 +75,7 @@ const ForumPage = () => {
                             likeCount={post.likeCount}
                             commentCount={post.commentCount}
                             comments={post.comments}
+                            postId={post.postId}
                         />
                     );
                 })}

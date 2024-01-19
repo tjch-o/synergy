@@ -1,9 +1,11 @@
+import { convertTime } from "@/utils/clientUtils";
 import Image from "next/image";
 
-import CommentButton from "../buttons/CommentButton";
 import LikeButton from "../buttons/LikeButton";
+import ViewCommentsButton from "../buttons/ViewCommentsButton";
 
 interface PostProps {
+    postId: string;
     title: string;
     content: string;
     // image: string;
@@ -15,6 +17,7 @@ interface PostProps {
 }
 
 const Post = ({
+    postId,
     title,
     content,
     time,
@@ -23,17 +26,19 @@ const Post = ({
     commentCount,
     comments,
 }: PostProps) => {
-    const convertTime = (time: Date) => {
-        return new Date(time).toLocaleTimeString(undefined, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false,
-        });
-    };
+    // const convertTime = (time: Date) => {
+    //     return new Date(time).toLocaleTimeString(undefined, {
+    //         year: "numeric",
+    //         month: "long",
+    //         day: "numeric",
+    //         hour: "2-digit",
+    //         minute: "2-digit",
+    //         second: "2-digit",
+    //         hour12: false,
+    //     });
+    // };
+
+    window.localStorage.setItem("comments", JSON.stringify(comments));
 
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white ring-2 ring-purple-200 rotate-3d rotate-x-30 rotate-y-30 rotate-z-30 perspective-500">
@@ -49,9 +54,9 @@ const Post = ({
                 </p>
                 <div className="flex flex-row">
                     <LikeButton likeCount={likeCount} />
-                    <CommentButton
+                    <ViewCommentsButton
                         commentCount={commentCount}
-                        comments={comments}
+                        url={`/forum/view-post/${postId}`}
                     />
                 </div>
             </div>

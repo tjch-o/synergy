@@ -48,7 +48,7 @@ const CreatePostPage = () => {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/createPost",
+                "http://localhost:5000/create-post",
                 data,
             );
 
