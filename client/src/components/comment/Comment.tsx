@@ -2,13 +2,16 @@ import { convertTime } from "@/utils/clientUtils";
 
 interface CommentProps {
     content: string;
-    time: Date;
+    username: string;
+    time: string;
 }
 
-const Comment = ({ content, time }: CommentProps) => {
+const Comment = ({ content, username, time }: CommentProps) => {
+    console.log(time);
     return (
         <div>
             <p>{content}</p>
+            <p>{username}</p>
             <p>{convertTime(time)}</p>
         </div>
     );

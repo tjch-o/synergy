@@ -26,6 +26,7 @@ const createComment = async (req, res) => {
         await newComment.save();
 
         foundPost.comments.push(newComment);
+        foundPost.commentCount += 1;
         await foundPost.save();
 
         res.status(200).json({ message: "Comment created successfully." });

@@ -3,7 +3,7 @@
 import CloseButton from "@/components/buttons/CloseButton";
 import CreateCommentButton from "@/components/buttons/CreateCommentButton";
 import GoBackButton from "@/components/buttons/GoBackButton";
-import PostWithComment from "@/components/post/PostWithComments";
+import PostWithComments from "@/components/post/PostWithComments";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
@@ -16,13 +16,14 @@ const ViewPostPage = () => {
     const [postData, setPostData] = useState({
         title: "",
         content: "",
+        username: "",
+        time: "",
         comments: [],
     });
 
     const [commentData, setCommentData] = useState({
         postId: postId,
         content: "",
-        time: Date.now(),
     });
 
     const router = useRouter();
@@ -46,9 +47,15 @@ const ViewPostPage = () => {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
+
+        const data = {
+            ...commentData,
+            time: Date.now(),
+        };
+
         const res = await axios.post(
             "http://localhost:5000/create-comment",
-            commentData,
+            data,
         );
 
         if (res.status == 200) {
@@ -64,7 +71,14 @@ const ViewPostPage = () => {
             const res = await axios.get(
                 `http://localhost:5000/get-post/${postId}`,
             );
-            console.log(res.data);
+            console.log(res.data.foundPostWithUsername);
+            setPostData({
+                title: res.data.foundPostWithUsername.title,
+                content: res.data.foundPostWithUsername.content,
+                username: res.data.foundPostWithUsername.username,
+                time: res.data.foundPostWithUsername.time,
+                comments: res.data.foundPostWithUsername.comments,
+            });
         };
 
         fetchPostData();
@@ -72,7 +86,13 @@ const ViewPostPage = () => {
 
     return (
         <div>
-            {/* <PostWithComment comments={parsedComments}/> */}
+            <PostWithComments
+                title={postData.title}
+                content={postData.content}
+                username={postData.username}
+                time={postData.time}
+                comments={postData.comments}
+            />
             <GoBackButton onClick={handleGoBack} />
             <CreateCommentButton onClick={handleClick} />
             {isVisible && (
