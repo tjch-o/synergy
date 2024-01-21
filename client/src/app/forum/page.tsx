@@ -19,7 +19,7 @@ const ForumPage = () => {
         if (typeof window === "undefined") return;
         const localUserId = window.localStorage.getItem("userId");
         setUserId(localUserId);
-    },[]);
+    }, []);
 
     useEffect(() => {
         const fetchPostsData = async () => {
@@ -54,13 +54,17 @@ const ForumPage = () => {
 
     const onClickLogout = async () => {
         try {
-            window.localStorage.removeItem("userId")
-            window.localStorage.removeItem("token")
-            router.push("/login")
+            router.push("/login");
+            window.localStorage.removeItem("userId");
+            window.localStorage.removeItem("token");
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
-    }
+    };
+
+    const isAuthenticated = window.localStorage.getItem("userId")
+        ? true
+        : false;
 
     return (
         <div
@@ -72,21 +76,27 @@ const ForumPage = () => {
                 Discussion Posts
             </h1>
             <div className="grid grids-col-1 md:grids-cols-3 lg:grid-cols-4 gap-2 p-4">
-                {posts.map((post, index) => {
-                    return (
-                        <Post
-                            key={index}
-                            title={post.title}
-                            content={post.content}
-                            time={post.time}
-                            username={post.username}
-                            likeCount={post.likeCount}
-                            commentCount={post.commentCount}
-                            comments={post.comments}
-                            postId={post.postId}
-                        />
-                    );
-                })}
+                {isAuthenticated ? (
+                    posts.map((post, index) => {
+                        return (
+                            <Post
+                                key={index}
+                                title={post.title}
+                                content={post.content}
+                                time={post.time}
+                                username={post.username}
+                                likeCount={post.likeCount}
+                                commentCount={post.commentCount}
+                                comments={post.comments}
+                                postId={post.postId}
+                            />
+                        );
+                    })
+                ) : (
+                    <p className="text-white">
+                        Please login to see posts on this platform.
+                    </p>
+                )}
             </div>
             <CreatePostButton onClick={onClickCreatePost} />
             <LogoutButton onClick={onClickLogout} />

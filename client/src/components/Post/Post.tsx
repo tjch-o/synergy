@@ -13,7 +13,6 @@ interface PostProps {
     username: string;
     likeCount: number;
     commentCount: number;
-    comments: Array;
 }
 
 const Post = ({
@@ -23,9 +22,8 @@ const Post = ({
     time,
     username,
     likeCount,
-    commentCount
+    commentCount,
 }: PostProps) => {
-
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white ring-2 ring-purple-200 rotate-3d rotate-x-30 rotate-y-30 rotate-z-30 perspective-500">
             {/* <Image className="w-full" src="/img/card-top.jpg" alt="" /> */}

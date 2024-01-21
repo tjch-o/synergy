@@ -6,7 +6,7 @@ interface LogoutButtonProps {
     onClick: () => void;
 }
 
-const LogoutButton = ({onClick}: LogoutButtonProps) => {
+const LogoutButton = ({ onClick }: LogoutButtonProps) => {
     return (
         <div className="hover:opacity-50">
             <button
