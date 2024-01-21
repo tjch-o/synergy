@@ -180,7 +180,7 @@ const SignupPage = () => {
                 <p className="font-xl mt-4">
                     {" "}
                     Already have an account?{" "}
-                    <Link href="/auth/login">Login</Link>
+                    <Link href="/login">Login</Link>
                 </p>
             </div>
         </div>

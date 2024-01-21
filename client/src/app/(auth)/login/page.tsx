@@ -113,7 +113,7 @@ const LoginPage = () => {
 
             <p className="font-xl mt-4">
                 {" "}
-                Do not have an account? <Link href="/auth/signup">
+                Do not have an account? <Link href="/signup">
                     Sign up
                 </Link>{" "}
             </p>

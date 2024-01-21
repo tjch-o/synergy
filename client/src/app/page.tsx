@@ -1,5 +1,5 @@
-import LoginPage from "./auth/login/page";
-import SignupPage from "./auth/signup/page";
+import LoginPage from "./(auth)/login/page";
+import SignupPage from "./(auth)/signup/page";
 import CreatePostPage from "./forum/create-post/[id]/page";
 import Forum from "./forum/page";
 

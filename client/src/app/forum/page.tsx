@@ -19,7 +19,7 @@ const ForumPage = () => {
         if (typeof window === "undefined") return;
         const localUserId = window.localStorage.getItem("userId");
         setUserId(localUserId);
-    });
+    },[]);
 
     useEffect(() => {
         const fetchPostsData = async () => {
@@ -45,7 +45,7 @@ const ForumPage = () => {
             if (res.status == 200) {
                 router.push(`/forum/create-post/${userId}`);
             } else {
-                router.push("/auth/login");
+                router.push("/login");
             }
         } catch (error) {
             console.log(error);
@@ -56,7 +56,7 @@ const ForumPage = () => {
         try {
             window.localStorage.removeItem("userId")
             window.localStorage.removeItem("token")
-            router.push("/auth/login")
+            router.push("/login")
         } catch (error) {
             console.error(error)
         }
