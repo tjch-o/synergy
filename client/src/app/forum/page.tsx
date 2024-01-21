@@ -5,6 +5,7 @@ import LogoutButton from "@/components/buttons/LogoutButton";
 import NavBar from "@/components/navbar/NavBar";
 import Post from "@/components/post/Post";
 import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -67,39 +68,41 @@ const ForumPage = () => {
         : false;
 
     return (
-        <div
-            className="bg-fixed bg-center bg-cover h-screen"
-            style={{ backgroundImage: "url('./bg.jpg')" }}
-        >
-            <NavBar />
-            <h1 className="text-3xl text-center m-4 text-white">
-                Discussion Posts
-            </h1>
-            <div className="grid grids-col-1 md:grids-cols-3 lg:grid-cols-4 gap-2 p-4">
-                {isAuthenticated ? (
-                    posts.map((post, index) => {
-                        return (
-                            <Post
-                                key={index}
-                                title={post.title}
-                                content={post.content}
-                                time={post.time}
-                                username={post.username}
-                                likeCount={post.likeCount}
-                                commentCount={post.commentCount}
-                                comments={post.comments}
-                                postId={post.postId}
-                            />
-                        );
-                    })
-                ) : (
-                    <p className="text-white">
-                        Please login to see posts on this platform.
-                    </p>
-                )}
+        <div className="bg-fixed bg-center bg-cover h-screen">
+            <div className="absolute-inset-0">
+                <Image src="/bg.jpg" alt="bg" layout="fill" objectFit="cover" />
             </div>
-            <CreatePostButton onClick={onClickCreatePost} />
-            <LogoutButton onClick={onClickLogout} />
+            <div className="relative">
+                <NavBar />
+                <h1 className="text-3xl text-center m-4 text-white">
+                    Discussion Posts
+                </h1>
+                <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
+                    {isAuthenticated ? (
+                        posts.map((post, index) => {
+                            return (
+                                <Post
+                                    key={index}
+                                    title={post.title}
+                                    content={post.content}
+                                    time={post.time}
+                                    username={post.username}
+                                    likeCount={post.likeCount}
+                                    commentCount={post.commentCount}
+                                    comments={post.comments}
+                                    postId={post.postId}
+                                />
+                            );
+                        })
+                    ) : (
+                        <p className="text-white">
+                            Please login to see posts on this platform.
+                        </p>
+                    )}
+                </div>
+                <CreatePostButton onClick={onClickCreatePost} />
+                <LogoutButton onClick={onClickLogout} />
+            </div>
         </div>
     );
 };
