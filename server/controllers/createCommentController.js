@@ -3,7 +3,7 @@ const post = require("../models/post");
 const comment = require("../models/comment");
 
 const createComment = async (req, res) => {
-    const { postId, content, time } = req.body;
+    const { postId, userId, content, time } = req.body;
 
     const foundPost = await post.findOne({ postId: postId });
 
@@ -11,7 +11,6 @@ const createComment = async (req, res) => {
         return res.status(404).json({ message: "Post not found" });
     }
 
-    const userId = foundPost.userId;
     const commentId = uuid.v4();
 
     const newComment = new comment({

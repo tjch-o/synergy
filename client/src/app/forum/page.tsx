@@ -11,16 +11,14 @@ import { useEffect, useState } from "react";
 const ForumPage = () => {
     const [posts, setPosts] = useState([]);
     const [userId, setUserId] = useState("");
-    const [username, setUsername] = useState("");
 
     const router = useRouter();
 
+    // prevents too many re-renders
     useEffect(() => {
         if (typeof window === "undefined") return;
         const localUserId = window.localStorage.getItem("userId");
-        const localUsername = window.localStorage.getItem("username");
         setUserId(localUserId);
-        setUsername(localUsername);
     });
 
     useEffect(() => {
@@ -33,7 +31,7 @@ const ForumPage = () => {
         fetchPostsData();
     }, []);
 
-    const onClick = async () => {
+    const onClickCreatePost = async () => {
         try {
             const res = await axios.get(
                 "http://localhost:5000/access-create-post",
@@ -53,6 +51,16 @@ const ForumPage = () => {
             console.log(error);
         }
     };
+
+    const onClickLogout = async () => {
+        try {
+            window.localStorage.removeItem("userId")
+            window.localStorage.removeItem("token")
+            router.push("/auth/login")
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <div
@@ -80,8 +88,8 @@ const ForumPage = () => {
                     );
                 })}
             </div>
-            <CreatePostButton onClick={onClick} />
-            <LogoutButton />
+            <CreatePostButton onClick={onClickCreatePost} />
+            <LogoutButton onClick={onClickLogout} />
         </div>
     );
 };

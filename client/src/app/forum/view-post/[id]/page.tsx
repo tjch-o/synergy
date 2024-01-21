@@ -11,6 +11,7 @@ import { FormEvent, useEffect, useState } from "react";
 const ViewPostPage = () => {
     const urlParams = useParams();
     const postId = urlParams.id;
+    const userId = window.localStorage.getItem("userId");
 
     const [isVisible, setIsVisible] = useState(false);
     const [postData, setPostData] = useState({
@@ -50,6 +51,7 @@ const ViewPostPage = () => {
 
         const data = {
             ...commentData,
+            userId: userId,
             time: Date.now(),
         };
 

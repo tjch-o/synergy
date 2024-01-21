@@ -2,13 +2,11 @@
 
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const LogoutButton = () => {
-    const onClick = (event: MouseEvent) => {
-        window.localStorage.removeItem("userId");
-        window.localStorage.removeItem("username");
-        window.location.href = "/auth/login";
-    };
+interface LogoutButtonProps {
+    onClick: () => void;
+}
 
+const LogoutButton = ({onClick}: LogoutButtonProps) => {
     return (
         <div className="hover:opacity-50">
             <button

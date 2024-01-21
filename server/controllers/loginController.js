@@ -21,7 +21,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign({ userId: foundUser.userId }, process.env.SECRET, {
-        expiresIn: "1h",
+        expiresIn: "1m",
     });
 
     // cannot send both a json response and a token seperately
