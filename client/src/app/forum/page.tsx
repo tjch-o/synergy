@@ -2,8 +2,8 @@
 
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import LogoutButton from "@/components/buttons/LogoutButton";
-import NavBar from "@/components/navbar/NavBar";
-import Post from "@/components/post/Post";
+import NavBar from "@/components/nav/NavBar";
+import Post from "@/components/posts/Post";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

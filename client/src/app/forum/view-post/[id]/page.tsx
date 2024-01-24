@@ -3,8 +3,8 @@
 import CloseButton from "@/components/buttons/CloseButton";
 import CreateCommentButton from "@/components/buttons/CreateCommentButton";
 import GoBackButton from "@/components/buttons/GoBackButton";
-import NavBar from "@/components/navbar/NavBar";
-import PostWithComments from "@/components/post/PostWithComments";
+import NavBar from "@/components/nav/NavBar";
+import PostWithComments from "@/components/posts/PostWithComments";
 import axios from "axios";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";

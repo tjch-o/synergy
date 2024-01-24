@@ -1,4 +1,4 @@
-import NavBarLogo from "../logo/NavBarLogo";
+import NavBarLogo from "../logos/NavBarLogo";
 
 const NavBar = () => {
     return (

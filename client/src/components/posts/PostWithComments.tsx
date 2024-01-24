@@ -1,6 +1,6 @@
-import Comment from "@/components/comment/Comment";
+import Comment from "@/components/comments/Comment";
 
-import PostTitleComment from "../comment/PostTitleComment";
+import PostTitleComment from "../comments/PostTitleComment";
 
 interface PostWithCommentsProps {
     title: string;
