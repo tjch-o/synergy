@@ -1,5 +1,6 @@
 import Comment from "@/components/comment/Comment";
-import { convertTime } from "@/utils/clientUtils";
+
+import PostTitleComment from "../comment/PostTitleComment";
 
 interface PostWithCommentsProps {
     title: string;
@@ -18,10 +19,12 @@ const PostWithComments = ({
 }: PostWithCommentsProps) => {
     return (
         <div>
-            <h1>{title}</h1>
-            <p>{content}</p>
-            <p>{username}</p>
-            <p>{convertTime(time)}</p>
+            <PostTitleComment
+                title={title}
+                content={content}
+                username={username}
+                time={time}
+            />
             <div>
                 {comments.map((comment) => (
                     <Comment

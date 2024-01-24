@@ -12,6 +12,7 @@ const createPostRoute = require("./routes/createPostRoute");
 const getPostRoute = require("./routes/getPostRoute");
 const fetchPostsRoute = require("./routes/fetchPostsRoute");
 const createCommentRoute = require("./routes/createCommentRoute");
+const deleteAccountRoute = require("./routes/deleteAccountRoute");
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,7 @@ app.use(createPostRoute);
 app.use(getPostRoute);
 app.use(fetchPostsRoute);
 app.use(createCommentRoute);
+app.use(deleteAccountRoute);
 
 const port = 5000;
 

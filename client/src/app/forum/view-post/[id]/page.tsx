@@ -3,8 +3,10 @@
 import CloseButton from "@/components/buttons/CloseButton";
 import CreateCommentButton from "@/components/buttons/CreateCommentButton";
 import GoBackButton from "@/components/buttons/GoBackButton";
+import NavBar from "@/components/navbar/NavBar";
 import PostWithComments from "@/components/post/PostWithComments";
 import axios from "axios";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -41,7 +43,9 @@ const ViewPostPage = () => {
         router.push("/forum");
     };
 
-    const handleChangeInCommentData = (event: FormEvent<HTMLInputElement>) => {
+    const handleChangeInCommentData = (
+        event: FormEvent<HTMLTextAreaElement>,
+    ) => {
         const { name, value } = event.target;
         setCommentData((prevData) => ({ ...prevData, [name]: value }));
     };
@@ -88,34 +92,52 @@ const ViewPostPage = () => {
 
     return (
         <div>
-            <PostWithComments
-                title={postData.title}
-                content={postData.content}
-                username={postData.username}
-                time={postData.time}
-                comments={postData.comments}
-            />
-            <GoBackButton onClick={handleGoBack} />
-            <CreateCommentButton onClick={handleClick} />
-            {isVisible && (
-                <div>
-                    <CloseButton onClick={handleClose} />
-                    <form onSubmit={handleSubmit}>
-                        <input
+            <div className="fixed inset-0">
+                <Image
+                    src="/bg.jpg"
+                    alt="bg"
+                    layout="fill"
+                    objectFit="cover"
+                />
+            </div>
+            <div className="relative">
+                <NavBar />
+                <PostWithComments
+                    title={postData.title}
+                    content={postData.content}
+                    username={postData.username}
+                    time={postData.time}
+                    comments={postData.comments}
+                />
+                <GoBackButton onClick={handleGoBack} />
+                <CreateCommentButton onClick={handleClick} />
+                {isVisible && (
+                    <div>
+                        <CloseButton onClick={handleClose} />
+                        <form onSubmit={handleSubmit}>
+                            {/* <input
                             className="border-2 border-black rounded-lg py-2"
                             placeholder="Enter comment here..."
                             name="content"
+                            type="textarea"
                             onChange={handleChangeInCommentData}
-                        />
-                        <button
-                            type="submit"
-                            className="py-2 px-4 rounded text-black"
-                        >
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            )}
+                        /> */}
+                            <textarea
+                                className="border-2 border-black rounded-lg py-2 w-full h-24"
+                                name="content"
+                                rows={4}
+                                onChange={handleChangeInCommentData}
+                            />
+                            <button
+                                type="submit"
+                                className="py-2 px-4 rounded text-black"
+                            >
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

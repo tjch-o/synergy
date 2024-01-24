@@ -69,7 +69,7 @@ const ForumPage = () => {
 
     return (
         <div className="bg-fixed bg-center bg-cover h-screen">
-            <div className="absolute-inset-0">
+            <div className="fixed inset-0">
                 <Image src="/bg.jpg" alt="bg" layout="fill" objectFit="cover" />
             </div>
             <div className="relative">
