@@ -27,12 +27,13 @@ const PostWithComments = ({
             />
             <div>
                 {comments.map((comment) => (
-                    <Comment
-                        key={comment._id}
-                        username={comment.username}
-                        content={comment.content}
-                        time={comment.time}
-                    />
+                    <div key={comment._id}>
+                        <Comment
+                            username={comment.username}
+                            content={comment.content}
+                            time={comment.time}
+                        />
+                    </div>
                 ))}
             </div>
         </div>

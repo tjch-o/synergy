@@ -93,12 +93,7 @@ const ViewPostPage = () => {
     return (
         <div>
             <div className="fixed inset-0">
-                <Image
-                    src="/bg.jpg"
-                    alt="bg"
-                    layout="fill"
-                    objectFit="cover"
-                />
+                <Image src="/bg.jpg" alt="bg" layout="fill" objectFit="cover" />
             </div>
             <div className="relative">
                 <NavBar />

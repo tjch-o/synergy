@@ -3,6 +3,7 @@
 import FailureAlert from "@/components/alerts/FailureAlert";
 import SuccessAlert from "@/components/alerts/SuccessAlert";
 import axios from "axios";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -73,48 +74,61 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="w-1/2 rounded overflow-hidden shadow-lg">
-            <form onSubmit={handleSubmit}>
-                <label className="block font-bold">Username</label>
-                <input
-                    className="block mt-2 mb-4 w-1/2 h-8"
-                    name="username"
-                    type="text"
-                    placeholder="Enter your username"
-                    onChange={handleChangeInData}
-                    required
+        <div>
+            <div className="relative flex justify-center items-center h-screen z-10">
+                <div className="w-1/2 rounded overflow-hidden shadow-lg bg-white">
+                    <form onSubmit={handleSubmit}>
+                        <label className="block font-bold">Username</label>
+                        <input
+                            className="block mt-2 mb-4 w-1/2 h-8"
+                            name="username"
+                            type="text"
+                            placeholder="Enter your username"
+                            onChange={handleChangeInData}
+                            required
+                        />
+
+                        <label className="block font-bold">Password</label>
+                        <input
+                            className="block mt-2 mb-4 w-1/2 h-8"
+                            name="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            onChange={handleChangeInData}
+                            required
+                        />
+
+                        <button
+                            type="submit"
+                            className="block font-2xl py-2 px-4 bg-blue-800 text-white rounded shadow-md"
+                        >
+                            Login
+                        </button>
+
+                        {loginStatus ? (
+                            isVisible ? (
+                                <SuccessAlert message={serverStatusMsg} />
+                            ) : null
+                        ) : isVisible ? (
+                            <FailureAlert message={serverStatusMsg} />
+                        ) : null}
+                    </form>
+
+                    <p className="font-xl mt-4 pb-4">
+                        {" "}
+                        Do not have an account?{" "}
+                        <Link href="/signup">Sign up</Link>{" "}
+                    </p>
+                </div>
+            </div>
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/login.jpg"
+                    alt="login"
+                    layout="fill"
+                    objectFit="cover"
                 />
-
-                <label className="block font-bold">Password</label>
-                <input
-                    className="block mt-2 mb-4 w-1/2 h-8"
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    onChange={handleChangeInData}
-                    required
-                />
-
-                <button
-                    type="submit"
-                    className="block font-2xl py-2 px-4 bg-blue-800 text-white rounded shadow-md"
-                >
-                    Login
-                </button>
-
-                {loginStatus ? (
-                    isVisible ? (
-                        <SuccessAlert message={serverStatusMsg} />
-                    ) : null
-                ) : isVisible ? (
-                    <FailureAlert message={serverStatusMsg} />
-                ) : null}
-            </form>
-
-            <p className="font-xl mt-4">
-                {" "}
-                Do not have an account? <Link href="/signup">Sign up</Link>{" "}
-            </p>
+            </div>
         </div>
     );
 };
