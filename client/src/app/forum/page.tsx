@@ -1,6 +1,7 @@
 "use client";
 
 import CreatePostButton from "@/components/buttons/CreatePostButton";
+import DeleteAccountButton from "@/components/buttons/DeleteAccountButton";
 import LogoutButton from "@/components/buttons/LogoutButton";
 import NavBar from "@/components/nav/NavBar";
 import Post from "@/components/posts/Post";
@@ -63,6 +64,27 @@ const ForumPage = () => {
         }
     };
 
+    const onClickDeleteAccount = async () => {
+        try {
+            const res = await axios.get(
+                "http://localhost:5000/access-delete-account",
+                {
+                    validateStatus: (status) => {
+                        return status < 500 || status == 401 || status == 403;
+                    },
+                },
+            );
+
+            if (res.status == 200) {
+                router.push(`/delete-account/${userId}`);
+            } else {
+                router.push("/login");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const isAuthenticated = window.localStorage.getItem("userId")
         ? true
         : false;
@@ -89,7 +111,6 @@ const ForumPage = () => {
                                     username={post.username}
                                     likeCount={post.likeCount}
                                     commentCount={post.commentCount}
-                                    comments={post.comments}
                                     postId={post.postId}
                                 />
                             );
@@ -101,6 +122,7 @@ const ForumPage = () => {
                     )}
                 </div>
                 <CreatePostButton onClick={onClickCreatePost} />
+                <DeleteAccountButton onClick={onClickDeleteAccount} />
                 <LogoutButton onClick={onClickLogout} />
             </div>
         </div>

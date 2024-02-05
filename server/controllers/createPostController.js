@@ -18,6 +18,12 @@ const createPost = async (req, res) => {
         comments: comments,
     });
 
+    // cannot have two posts by the same user with the same title
+    const foundPost = await post.findOne({ userId: userId, title: title });
+    if (foundPost) {
+        return res.status(400).json({ message: "Post already exists." });
+    }
+
     try {
         await newPost.save();
         res.status(200).json({ message: "Post created successfully." });

@@ -76,6 +76,11 @@ const SignupPage = () => {
                 );
                 window.localStorage.setItem("token", res.data.token);
 
+                axios.interceptors.request.use((config) => {
+                    config.headers.authorization = `Bearer ${res.data.token}`;
+                    return config;
+                });
+
                 try {
                     const res = await axios.get(
                         "http://localhost:5000/access-forum",
