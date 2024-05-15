@@ -25,11 +25,13 @@ const signUp = async (req, res) => {
         const token = jwt.sign({ userId: userId }, process.env.SECRET, {
             expiresIn: "1h",
         });
+
         return res.status(200).json({
             message: "Account created successfully.",
             loggedUsername: newUser.username,
             token: token
         });
+        
     } catch (error) {
         console.error(error);
         dupKeyErrorCode = 11000;
