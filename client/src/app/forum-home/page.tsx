@@ -1,9 +1,9 @@
 "use client";
 
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const ForumHomePage = () => {
-    console.log(window.sessionStorage.getItem("token"));
 
     // try {
     //     const res = await axios.get("http://localhost:5000/auth", {
@@ -16,7 +16,9 @@ const ForumHomePage = () => {
     //     console.log(error)
     // }
 
-    return <p> you made it! :D </p>;
+    return (
+        <p>you made it! welcome {window.sessionStorage.getItem("username")} :D</p>
+    );
 };
 
 export default ForumHomePage;

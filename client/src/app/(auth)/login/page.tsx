@@ -28,8 +28,9 @@ const LoginPage = () => {
         event.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:5000/login", data);
-            console.log(res.data);
+            const res = await axios.post("http://localhost:5000/login", data, {validateStatus: 
+                status => status >= 200 && status <= 500}
+            );
 
             if (res.status == 200) {
                 setLoginStatus(true);
@@ -43,14 +44,16 @@ const LoginPage = () => {
 
                 setTimeout(() => {
                     router.push("/forum-home");
-                }, 500);
+                }, 500);  
             } else {
                 setLoginStatus(false);
                 setLoginStatusMsg(res.data.message);
                 setLoginStatusVisible(true);
             }
         } catch (error) {
+            setLoginStatus(false);
             setLoginStatusMsg("An error occurred. Please try again.");
+            setLoginStatusVisible(true);
         }
     };
 

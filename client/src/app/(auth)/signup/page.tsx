@@ -46,8 +46,9 @@ const SignupPage = () => {
         const { confirmPassword, ...rest } = data;
 
         try {
-            const res = await axios.post("http://localhost:5000/user", rest);
-            console.log(res.data);
+            const res = await axios.post("http://localhost:5000/user", rest, {
+                validateStatus: (status) => status >= 200 && status <= 500,
+            });
 
             if (res.status == 200) {
                 setCreateAccountStatus(true);
@@ -68,7 +69,9 @@ const SignupPage = () => {
                 setSignupStatusVisible(true);
             }
         } catch (error) {
+            setCreateAccountStatus(false);
             setSignupStatusMsg("An error occurred. Please try again.");
+            setSignupStatusVisible(true);
         }
     };
 

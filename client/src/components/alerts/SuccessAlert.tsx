@@ -16,7 +16,7 @@ const SuccessAlert = ({ message }: SuccessAlertProps) => {
     return (
         isAlertVisible && (
             <div
-                className="bg-green-700 w-1/2 text-white px-4 py-3 rounded relative ml-4"
+                className="bg-green-700 w-1/2 text-white px-4 py-3 rounded relative ml-4 mt-4"
                 role="alert"
             >
                 <span className="block sm:inline">{message}</span>
