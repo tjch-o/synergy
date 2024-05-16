@@ -6,6 +6,7 @@
     "client": "cd client && npm run dev",
     "server": "cd server && npm run start",
     "start": "concurrently \"npm run client\" \"npm run server\"",
+    "build": "cd client && npm run build",
     "formatClient": "cd client && npm run format",
     "formatServer": "cd server && npm run format",
     "format": "concurrently \"npm run formatClient\" \"npm run formatServer\"",

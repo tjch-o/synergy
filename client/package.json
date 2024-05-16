@@ -1,0 +1,38 @@
+{
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
+        "@fontsource/rubik-doodle-shadow": "^5.0.1",
+        "@mui/icons-material": "^5.15.3",
+        "@mui/material": "^5.15.3",
+        "axios": "^1.6.5",
+        "form-data": "^4.0.0",
+        "next": "^14.2.3",
+        "next-auth": "^4.24.5",
+        "react": "^18",
+        "react-dom": "^18"
+    },
+    "devDependencies": {
+        "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "autoprefixer": "^10.4.16",
+        "eslint": "^8",
+        "eslint-config-next": "14.0.4",
+        "postcss": "^8.4.33",
+        "prettier": "3.1.1",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5"
+    }
+}

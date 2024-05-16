@@ -19,10 +19,10 @@ app.use(signupRoute);
 app.use(loginRoute);
 app.use(deleteUserRoute);
 
-app.get("/", authenticateToken, (req, res) => {
-    res.status(200).send("you have access to the protected route")
+app.get("/auth", authenticateToken, (req, res) => {
+  res.status(200).send("you have access to the protected route");
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });
