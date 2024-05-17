@@ -14,10 +14,12 @@ const port = 5000;
 const signupRoute = require("./routes/signupRoute");
 const loginRoute = require("./routes/loginRoute");
 const deleteUserRoute = require("./routes/deleteUserRoute");
+const forumPostsRoute = require("./routes/forumPostsRoute");
 
 app.use(signupRoute);
 app.use(loginRoute);
 app.use(deleteUserRoute);
+app.use(forumPostsRoute);
 
 app.get("/auth", authenticateToken, (req, res) => {
   res.status(200).send("you have access to the protected route");
