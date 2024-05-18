@@ -44,7 +44,7 @@ const LoginPage = () => {
 
                 setTimeout(() => {
                     router.push("/forum-home");
-                }, 500);
+                }, 200);
             } else {
                 setLoginStatus(false);
                 setLoginStatusMsg(res.data.message);

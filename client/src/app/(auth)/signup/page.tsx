@@ -62,7 +62,7 @@ const SignupPage = () => {
 
                 setTimeout(() => {
                     router.push("/forum-home");
-                }, 500);
+                }, 200);
             } else {
                 setCreateAccountStatus(false);
                 setSignupStatusMsg(res.data.message);

@@ -37,6 +37,24 @@ const ForumHomePage = () => {
         fetchPostsData();
     }, []);
 
+    const onClickDeleteAccount = async () => {
+        try {
+            const res = await axios.get("http://localhost:5000/auth", {
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem(
+                        "token",
+                    )}`,
+                },
+            });
+
+            if (res.status == 200) {
+                router.push("/delete-account");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         // <p>
         //     you made it! welcome {window.sessionStorage.getItem("username")} :D
@@ -72,6 +90,11 @@ const ForumHomePage = () => {
                             Please login to see posts.{" "}
                         </p>
                     )}
+                </div>
+                <div>
+                    {token ? (
+                        <DeleteAccountButton onClick={onClickDeleteAccount} />
+                    ) : null}
                 </div>
             </div>
         </div>
