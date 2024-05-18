@@ -37,8 +37,8 @@ const LoginPage = () => {
                 setLoginStatusMsg(res.data.message);
                 setLoginStatusVisible(true);
 
-                window.sessionStorage.setItem("token", res.data.token);
-                window.sessionStorage.setItem("username", res.data.username);
+                window.localStorage.setItem("token", res.data.token);
+                window.localStorage.setItem("username", res.data.username);
                 axios.defaults.headers.common["Authorization"] =
                     `Bearer ${res.data.token}`;
 

@@ -23,7 +23,8 @@ const ForumHomePage = () => {
     // }
 
     const [posts, setPosts] = useState([]);
-    const username = window.sessionStorage.getItem("username");
+    const token = window.localStorage.getItem("token");
+    const username = window.localStorage.getItem("username");
     const router = useRouter();
 
     useEffect(() => {
@@ -50,20 +51,27 @@ const ForumHomePage = () => {
                     Discussion Posts
                 </h1>
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
-                    {posts.map((post, index) => {
-                        return (
-                            <Post
-                                key={index}
-                                title={post.title}
-                                content={post.content}
-                                time={post.time}
-                                username={post.username}
-                                likeCount={post.likeCount}
-                                commentCount={post.commentCount}
-                                postId={post.postId}
-                            />
-                        );
-                    })}
+                    {token ? (
+                        posts.map((post, index) => {
+                            return (
+                                <Post
+                                    key={index}
+                                    title={post.title}
+                                    content={post.content}
+                                    time={post.time}
+                                    username={post.username}
+                                    likeCount={post.likeCount}
+                                    commentCount={post.commentCount}
+                                    postId={post.postId}
+                                />
+                            );
+                        })
+                    ) : (
+                        <p className="flex items-center text-white">
+                            {" "}
+                            Please login to see posts.{" "}
+                        </p>
+                    )}
                 </div>
             </div>
         </div>
