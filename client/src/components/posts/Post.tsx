@@ -1,4 +1,4 @@
-import { convertTime } from "@/utils/clientUtils";
+import { getFormattedTime } from "@/utils/formatTime";
 import Image from "next/image";
 
 import LikeButton from "../buttons/LikeButton";
@@ -8,7 +8,6 @@ interface PostProps {
     postId: string;
     title: string;
     content: string;
-    // image: string;
     time: Date;
     username: string;
     likeCount: number;
@@ -34,7 +33,7 @@ const Post = ({
                 <p className="text-gray-700 text-white mb-2">{content}</p>
                 <p className="text-gray-700 text-base mb-2 font-semi-bold">
                     {" "}
-                    {`Posted by ${username} on ${convertTime(time)}`}
+                    {`Posted by ${username} on ${getFormattedTime(time)}`}
                 </p>
                 <div className="flex flex-row">
                     <LikeButton likeCount={likeCount} />

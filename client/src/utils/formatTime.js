@@ -1,4 +1,4 @@
-const convertTime = (time) => {
+const getFormattedTime = (time) => {
     return new Date(time).toLocaleTimeString(undefined, {
         year: "numeric",
         month: "long",
@@ -10,4 +10,4 @@ const convertTime = (time) => {
     });
 };
 
-module.exports = { convertTime };
+export { getFormattedTime };

@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
   content: String,
   postId: { type: String, required: true, unique: true },
   userId: { type: String, required: true, ref: "users" },
-  image: String,
+  // image: String,
   time: Date,
   likeCount: Number,
   commentCount: Number,

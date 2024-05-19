@@ -37,6 +37,10 @@ const ForumHomePage = () => {
         fetchPostsData();
     }, []);
 
+    const onClickCreatePost = () => {
+        router.push("/posts/create-post");
+    };
+
     const onClickDeleteAccount = async () => {
         try {
             const res = await axios.get("http://localhost:5000/auth", {
@@ -56,9 +60,6 @@ const ForumHomePage = () => {
     };
 
     return (
-        // <p>
-        //     you made it! welcome {window.sessionStorage.getItem("username")} :D
-        // </p>
         <div className="bg-fixed bg-center bg-cover h-screen">
             <div className="fixed inset-0">
                 <Image src="/bg.jpg" alt="bg" layout="fill" objectFit="cover" />
@@ -94,6 +95,10 @@ const ForumHomePage = () => {
                 <div>
                     {token ? (
                         <DeleteAccountButton onClick={onClickDeleteAccount} />
+                    ) : null}
+
+                    {token ? (
+                        <CreatePostButton onClick={onClickCreatePost} />
                     ) : null}
                 </div>
             </div>
