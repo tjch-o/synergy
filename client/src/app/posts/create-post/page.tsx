@@ -43,7 +43,9 @@ const CreatePostPage = () => {
         };
 
         try {
-            const res = await axios.post("http://localhost:5000/post", data);
+            const res = await axios.post("http://localhost:5000/post", data, {
+                validateStatus: (status) => status >= 200 && status <= 500,
+            });
 
             if (res.status == 200) {
                 setCreatePostStatus(true);
@@ -51,7 +53,7 @@ const CreatePostPage = () => {
                 setMessage(res.data.message);
 
                 setTimeout(() => {
-                    router.push("/forum");
+                    router.push("/forum-home");
                 }, 1000);
             } else {
                 setCreatePostStatus(false);

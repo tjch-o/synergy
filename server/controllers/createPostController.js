@@ -7,7 +7,7 @@ const createPost = async (req, res) => {
     req.body;
 
   const postId = uuid.v4();
-  const userId = getUserId(username);
+  const userId = await getUserId(username);
 
   const newPost = new post({
     title: title,
@@ -24,7 +24,7 @@ const createPost = async (req, res) => {
   if (foundPost) {
     return res
       .status(400)
-      .json({ message: "A post with this title already exists." });
+      .json({ message: "You already created a post with this title." });
   }
 
   try {
