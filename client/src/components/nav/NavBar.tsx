@@ -1,4 +1,5 @@
 import NavBarLogo from "../logos/NavBarLogo";
+import AccountMenu from "../menus/AccountMenu";
 
 interface NavBarProps {
     username: string;
@@ -11,7 +12,7 @@ const NavBar = ({ username }: NavBarProps) => {
                 <NavBarLogo />
             </div>
             <div className="text-white text-lg">
-                <p> welcome {username} </p>
+                <AccountMenu username={username} />
             </div>
         </nav>
     );

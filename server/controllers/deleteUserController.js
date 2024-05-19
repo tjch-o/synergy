@@ -21,7 +21,6 @@ const deleteUser = async (req, res) => {
   }
 
   await user.deleteOne({ username });
-
   return res.status(200).json({ message: "Account deleted successfully." });
 };
 
