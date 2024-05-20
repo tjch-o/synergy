@@ -39,8 +39,7 @@ const LoginPage = () => {
 
                 window.localStorage.setItem("token", res.data.token);
                 window.localStorage.setItem("username", res.data.username);
-                axios.defaults.headers.common["Authorization"] =
-                    `Bearer ${res.data.token}`;
+                axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 
                 setTimeout(() => {
                     router.push("/forum-home");
@@ -62,9 +61,7 @@ const LoginPage = () => {
             <div className="relative flex justify-center items-center h-screen z-10">
                 <div className="w-1/3 rounded overflow-hidden border-2 border-purple-600 hover:scale-110 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#8A05BE,0_0_15px_#8A05BE,0_0_30px_#8A05BE]">
                     <form onSubmit={handleSubmit}>
-                        <label className="block font-bold ml-4 mt-4 text-white">
-                            Username
-                        </label>
+                        <label className="block font-bold ml-4 mt-4 text-white">Username</label>
                         <input
                             className="block mt-2 mb-4 ml-4 w-1/2 h-8"
                             name="username"
@@ -74,9 +71,7 @@ const LoginPage = () => {
                             required
                         />
 
-                        <label className="block font-bold ml-4 text-white">
-                            Password
-                        </label>
+                        <label className="block font-bold ml-4 text-white">Password</label>
                         <input
                             className="block mt-2 ml-4 mb-4 w-1/2 h-8"
                             name="password"
@@ -104,18 +99,12 @@ const LoginPage = () => {
 
                     <p className="font-xl mt-4 ml-4 pb-4 text-white">
                         {" "}
-                        Do not have an account?{" "}
-                        <Link href="/signup">Sign up</Link>{" "}
+                        Do not have an account? <Link href="/signup">Sign up</Link>{" "}
                     </p>
                 </div>
             </div>
             <div className="absolute inset-0 z-0">
-                <Image
-                    src="/login.jpg"
-                    alt="login"
-                    layout="fill"
-                    objectFit="cover"
-                />
+                <Image src="/login.jpg" alt="login" layout="fill" objectFit="cover" />
             </div>
         </div>
     );

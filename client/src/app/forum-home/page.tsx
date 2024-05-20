@@ -19,7 +19,7 @@ const ForumHomePage = () => {
     const fetchPostsData = async () => {
         const res = await axios.get("http://localhost:5000/forum-posts");
         setPosts(res.data.posts);
-    }
+    };
 
     useEffect(() => {
         fetchPostsData();
@@ -33,9 +33,7 @@ const ForumHomePage = () => {
         try {
             const res = await axios.get("http://localhost:5000/auth", {
                 headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem(
-                        "token",
-                    )}`,
+                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
                 },
             });
 
@@ -54,9 +52,7 @@ const ForumHomePage = () => {
             </div>
             <div className="relative">
                 <NavBar username={username} />
-                <h1 className="text-3xl text-center m-8 text-white">
-                    Discussion Posts
-                </h1>
+                <h1 className="text-3xl text-center m-8 text-white">Discussion Posts</h1>
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
                         posts.map((post, index) => {
@@ -75,20 +71,13 @@ const ForumHomePage = () => {
                             );
                         })
                     ) : (
-                        <p className="flex items-center text-white">
-                            {" "}
-                            Please login to see posts.{" "}
-                        </p>
+                        <p className="flex items-center text-white"> Please login to see posts. </p>
                     )}
                 </div>
                 <div>
-                    {token ? (
-                        <DeleteAccountButton onClick={onClickDeleteAccount} />
-                    ) : null}
+                    {token ? <DeleteAccountButton onClick={onClickDeleteAccount} /> : null}
 
-                    {token ? (
-                        <CreatePostButton onClick={onClickCreatePost} />
-                    ) : null}
+                    {token ? <CreatePostButton onClick={onClickCreatePost} /> : null}
                 </div>
             </div>
         </div>

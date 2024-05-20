@@ -17,6 +17,7 @@ const deleteUserRoute = require("./routes/deleteUserRoute");
 const forumPostsRoute = require("./routes/forumPostsRoute");
 const createPostRoute = require("./routes/post/createPostRoute");
 const deletePostRoute = require("./routes/post/deletePostRoute");
+const getPostRoute = require("./routes/post/getPostRoute");
 
 app.use(signupRoute);
 app.use(loginRoute);
@@ -24,11 +25,12 @@ app.use(deleteUserRoute);
 app.use(forumPostsRoute);
 app.use(createPostRoute);
 app.use(deletePostRoute);
+app.use(getPostRoute);
 
 app.get("/auth", authenticateToken, (req, res) => {
-  res.status(200).send("you have access to the protected route");
+    res.status(200).send("you have access to the protected route");
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+    console.log(`Server is running on port: ${port}`);
 });

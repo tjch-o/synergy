@@ -7,12 +7,7 @@ interface PostTitleCommentProps {
     time: string;
 }
 
-const PostTitleComment = ({
-    title,
-    content,
-    username,
-    time,
-}: PostTitleCommentProps) => {
+const PostTitleComment = ({ title, content, username, time }: PostTitleCommentProps) => {
     return (
         <div className="inline-block min-w-max max-w-full rounded opacity-75 bg-blue-700 py-4 my-4">
             <h1 className="text-xl text-white pb-2 px-4">{title}</h1>
