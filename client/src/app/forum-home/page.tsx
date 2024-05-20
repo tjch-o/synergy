@@ -11,31 +11,19 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const ForumHomePage = () => {
-    // try {
-    //     const res = await axios.get("http://localhost:5000/auth", {
-    //         headers: {
-    //             Authorization: `Bearer ${window.sessionStorage.getItem("token")}`
-    //         }
-    //     })
-    //     console.log(res.status)
-    // } catch (error) {
-    //     console.log(error)
-    // }
-
     const [posts, setPosts] = useState([]);
     const token = window.localStorage.getItem("token");
     const username = window.localStorage.getItem("username");
     const router = useRouter();
 
-    useEffect(() => {
-        const fetchPostsData = async () => {
-            const res = await axios.get("http://localhost:5000/forum-posts");
-            setPosts(res.data.posts);
-            fetchPostsData();
-        };
+    const fetchPostsData = async () => {
+        const res = await axios.get("http://localhost:5000/forum-posts");
+        setPosts(res.data.posts);
+    }
 
+    useEffect(() => {
         fetchPostsData();
-    }, []);
+    }, [posts]);
 
     const onClickCreatePost = () => {
         router.push("/posts/create-post");
@@ -82,6 +70,7 @@ const ForumHomePage = () => {
                                     likeCount={post.likeCount}
                                     commentCount={post.commentCount}
                                     postId={post.postId}
+                                    isOwner={post.username == username}
                                 />
                             );
                         })
