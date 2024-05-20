@@ -31,8 +31,8 @@ const LikeButton = ({ isOwner, postId }: LikeButtonProps) => {
 
     return (
         isOwner ? (
-            <div className="flex flex-row p-2">
-                <Button onClick={handleDeletePost}>
+            <div className="text-sky-200 flex flex-row">
+                <Button onClick={handleDeletePost} sx={{color: '#c0e8e8'}}>
                     <DeleteIcon fontSize="medium" />
                 </Button>
             </div>

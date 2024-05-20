@@ -20,7 +20,7 @@ const login = async (req, res) => {
   }
 
   const token = jwt.sign({ userId: foundUser.userId }, process.env.SECRET, {
-    expiresIn: "1m",
+    expiresIn: "1h",
   });
 
   return res.status(200).json({
