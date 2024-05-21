@@ -135,11 +135,11 @@ const SignupPage = () => {
                             Create Account
                         </button>
 
-                        <p className="font-xl mt-2 my-4 ml-4 text-red-500">
-                            {clientValidationErrorMsg == "Passwords do not match."
-                                ? clientValidationErrorMsg
-                                : ""}
-                        </p>
+                        {clientValidationErrorMsg == "Passwords do not match." ? (
+                            <FailureAlert message={clientValidationErrorMsg} />
+                        ) : (
+                            ""
+                        )}
 
                         {createAccountStatus ? (
                             isSignupStatusVisible ? (

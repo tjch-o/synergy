@@ -2,6 +2,7 @@
 
 import FailureAlert from "@/components/alerts/FailureAlert";
 import SuccessAlert from "@/components/alerts/SuccessAlert";
+import LoginButton from "@/components/buttons/LoginButton";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +17,10 @@ const LoginPage = () => {
     const [loginStatus, setLoginStatus] = useState(false);
     const [loginStatusMsg, setLoginStatusMsg] = useState("");
     const [isLoginStatusVisible, setLoginStatusVisible] = useState(false);
+
+    const maxAttempts = 5;
+    const [loginAttempts, setLoginAttempts] = useState(maxAttempts);
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const router = useRouter();
 
@@ -36,6 +41,8 @@ const LoginPage = () => {
                 setLoginStatus(true);
                 setLoginStatusMsg(res.data.message);
                 setLoginStatusVisible(true);
+                setLoginAttempts(maxAttempts);
+                setButtonDisabled(false);
 
                 window.localStorage.setItem("token", res.data.token);
                 window.localStorage.setItem("username", res.data.username);
@@ -48,6 +55,19 @@ const LoginPage = () => {
                 setLoginStatus(false);
                 setLoginStatusMsg(res.data.message);
                 setLoginStatusVisible(true);
+                setLoginAttempts(loginAttempts - 1);
+
+                if (loginAttempts <= 1) {
+                    setButtonDisabled(true);
+                    setLoginStatusMsg(
+                        "Login attempts exceeded. Please try again after 30 seconds.",
+                    );
+                    setTimeout(() => {
+                        setButtonDisabled(false);
+                        setLoginAttempts(maxAttempts);
+                    }, 30000);
+                    console.log("Login attempts exceeded");
+                }
             }
         } catch (error) {
             setLoginStatus(false);
@@ -81,12 +101,7 @@ const LoginPage = () => {
                             required
                         />
 
-                        <button
-                            type="submit"
-                            className="block font-2xl py-2 px-4 ml-4 bg-blue-800 text-white rounded shadow-md"
-                        >
-                            Login
-                        </button>
+                        <LoginButton onClick={handleSubmit} disabled={buttonDisabled} />
 
                         {loginStatus ? (
                             isLoginStatusVisible ? (
