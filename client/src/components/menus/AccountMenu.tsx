@@ -44,7 +44,7 @@ const AccountMenu = ({ username }: AccountMenuProps) => {
                         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                     </IconButton>
                 </Tooltip>
-                <Typography sx={{ ml: 1, fontSize: "20px", fontFamily: "Arial" }}>
+                <Typography sx={{ ml: 1, fontSize: "20px", fontFamily: "Arial", color: "0x000000" }}>
                     {username}
                 </Typography>
             </Box>

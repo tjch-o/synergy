@@ -40,7 +40,7 @@ const Post = ({
                     <LikeButton likeCount={likeCount} />
                     <ViewCommentsButton
                         commentCount={commentCount}
-                        url={`/posts/view-post/${postId}`}
+                        postId={postId}
                     />
                     <div className="ml-auto">
                         <DeletePostButton isOwner={isOwner} postId={postId} />

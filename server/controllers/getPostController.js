@@ -5,12 +5,12 @@ const getPost = async (req, res) => {
     const { postId } = req.params;
 
     const foundPost = await post.findOne({ postId: postId });
-    let postObj = foundPost.toObject();
 
     if (!foundPost) {
         return res.status(404).json({ message: "Post not found." });
     }
 
+    let postObj = foundPost.toObject();
     const foundUser = await user.findOne({ userId: foundPost.userId });
 
     postObj.username = foundUser.username;
