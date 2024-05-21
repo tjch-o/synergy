@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const user = require("../models/user");
+const user = require("../../models/user");
 
 const deleteUser = async (req, res) => {
     const { username } = req.params;

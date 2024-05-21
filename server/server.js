@@ -11,10 +11,10 @@ app.use(express.json());
 
 const port = 5000;
 
-const signupRoute = require("./routes/signupRoute");
-const loginRoute = require("./routes/loginRoute");
-const deleteUserRoute = require("./routes/deleteUserRoute");
-const forumPostsRoute = require("./routes/forumPostsRoute");
+const signupRoute = require("./routes/user/signupRoute");
+const loginRoute = require("./routes/user/loginRoute");
+const deleteUserRoute = require("./routes/user/deleteUserRoute");
+const forumPostsRoute = require("./routes/post/forumPostsRoute");
 const createPostRoute = require("./routes/post/createPostRoute");
 const deletePostRoute = require("./routes/post/deletePostRoute");
 const getPostRoute = require("./routes/post/getPostRoute");

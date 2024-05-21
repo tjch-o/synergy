@@ -1,6 +1,6 @@
 const uuid = require("uuid");
-const post = require("../models/post");
-const getUserId = require("../utils/getUserId");
+const post = require("../../models/post");
+const getUserId = require("../../utils/getUserId");
 
 const createPost = async (req, res) => {
     const { title, content, username, time, likeCount, commentCount, comments } = req.body;

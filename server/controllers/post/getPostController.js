@@ -1,5 +1,5 @@
-const post = require("../models/post");
-const user = require("../models/user");
+const post = require("../../models/post");
+const user = require("../../models/user");
 
 const getPost = async (req, res) => {
     const { postId } = req.params;

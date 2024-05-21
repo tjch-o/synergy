@@ -38,10 +38,7 @@ const Post = ({
                 </p>
                 <div className="flex flex-row">
                     <LikeButton likeCount={likeCount} />
-                    <ViewCommentsButton
-                        commentCount={commentCount}
-                        postId={postId}
-                    />
+                    <ViewCommentsButton commentCount={commentCount} postId={postId} />
                     <div className="ml-auto">
                         <DeletePostButton isOwner={isOwner} postId={postId} />
                     </div>

@@ -1,5 +1,5 @@
-const post = require("../models/post");
-const getUserId = require("../utils/getUserId");
+const post = require("../../models/post");
+const getUserId = require("../../utils/getUserId");
 
 const deletePost = async (req, res) => {
     const { postId } = req.params;

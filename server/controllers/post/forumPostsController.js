@@ -1,6 +1,6 @@
-const post = require("../models/post");
-const user = require("../models/user");
-const mapUserIdsToUsernames = require("../utils/mapUserIdsToUsernames");
+const post = require("../../models/post");
+const user = require("../../models/user");
+const mapUserIdsToUsernames = require("../../utils/mapUserIdsToUsernames");
 
 const fetchPosts = async (req, res) => {
     // a join query with mongoose results in circular dependencies
