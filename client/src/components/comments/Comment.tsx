@@ -1,4 +1,4 @@
-import { convertTime } from "@/utils/clientUtils";
+import { getFormattedTime } from "@/utils/formatTime";
 
 interface CommentProps {
     content: string;
@@ -12,7 +12,7 @@ const Comment = ({ content, username, time }: CommentProps) => {
         <div className="inline-block min-w-max max-w-full rounded opacity-75 bg-violet-800 py-4 my-4">
             <p className="text-md text-white pb-2 px-4">{content}</p>
             <p className="text-sm text-pink-400 px-4">
-                Posted by {username} at {convertTime(time)}{" "}
+                Posted by {username} at {getFormattedTime(time)}{" "}
             </p>
         </div>
     );

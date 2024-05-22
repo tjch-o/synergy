@@ -19,6 +19,7 @@ const createPostRoute = require("./routes/post/createPostRoute");
 const deletePostRoute = require("./routes/post/deletePostRoute");
 const getPostRoute = require("./routes/post/getPostRoute");
 const createCommentRoute = require("./routes/comment/createCommentRoute");
+const getCommentRoute = require("./routes/comment/getCommentRoute");
 
 app.use(signupRoute);
 app.use(loginRoute);
@@ -28,6 +29,7 @@ app.use(createPostRoute);
 app.use(deletePostRoute);
 app.use(getPostRoute);
 app.use(createCommentRoute);
+app.use(getCommentRoute);
 
 app.get("/auth", authenticateToken, (req, res) => {
     res.status(200).send("you have access to the protected route");
