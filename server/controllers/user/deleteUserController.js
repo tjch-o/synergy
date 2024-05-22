@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const user = require("../../models/user");
+const post = require("../../models/post");
+const comment = require("../../models/comment");
+const getUserId = require("../../utils/getUserId");
 
 const deleteUser = async (req, res) => {
     const { username } = req.params;
@@ -17,7 +20,11 @@ const deleteUser = async (req, res) => {
         return res.status(401).json({ message: "Invalid credentials." });
     }
 
+    const userId = await getUserId(username);
+
     await user.deleteOne({ username });
+    await post.deleteMany({ userId });
+    await comment.deleteMany({ userId });
     return res.status(200).json({ message: "Account deleted successfully." });
 };
 

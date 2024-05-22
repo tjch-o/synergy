@@ -1,4 +1,5 @@
 const post = require("../../models/post");
+const comment = require("../../models/comment");
 const getUserId = require("../../utils/getUserId");
 
 const deletePost = async (req, res) => {
@@ -18,6 +19,7 @@ const deletePost = async (req, res) => {
     }
 
     await post.deleteOne({ postId });
+    await comment.deleteMany({ postId });
     return res.status(200).json({ message: "Post deleted successfully." });
 };
 
