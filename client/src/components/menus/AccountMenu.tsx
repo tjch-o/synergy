@@ -12,9 +12,10 @@ import * as React from "react";
 
 interface AccountMenuProps {
     username: string;
+    onLogout: () => void;
 }
 
-const AccountMenu = ({ username }: AccountMenuProps) => {
+const AccountMenu = ({ username, onLogout }: AccountMenuProps) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -23,6 +24,12 @@ const AccountMenu = ({ username }: AccountMenuProps) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleLogout = () => {
+        handleClose();
+        onLogout();
+    };
+
     return (
         <React.Fragment>
             <Box
@@ -92,7 +99,7 @@ const AccountMenu = ({ username }: AccountMenuProps) => {
                     <Avatar /> My account
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>

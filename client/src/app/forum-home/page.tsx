@@ -2,7 +2,7 @@
 
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import DeleteAccountButton from "@/components/buttons/DeleteAccountButton";
-import LogoutButton from "@/components/buttons/LogoutButton";
+// import LogoutButton from "@/components/buttons/LogoutButton";
 import NavBar from "@/components/nav/NavBar";
 import Post from "@/components/posts/Post";
 import axios from "axios";
@@ -45,13 +45,33 @@ const ForumHomePage = () => {
         }
     };
 
+    const onClickLogout = async () => {
+        try {
+            const res = await axios.post("http://localhost:5000/logout", {
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                },
+            });
+
+            if (res.status == 200) {
+                window.localStorage.removeItem("token");
+                window.localStorage.removeItem("username");
+                router.push("/login");
+            } else {
+                console.log(res);
+            }
+        } catch {
+            console.log("Failed to logout.");
+        }
+    };
+
     return (
         <div className="bg-fixed bg-center bg-cover h-screen">
             <div className="fixed inset-0">
                 <Image src="/bg.jpg" alt="bg" layout="fill" objectFit="cover" />
             </div>
             <div className="relative">
-                <NavBar username={username} />
+                <NavBar username={username} onLogout={onClickLogout} />
                 <h1 className="text-3xl text-center m-8 text-white">Discussion Posts</h1>
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
