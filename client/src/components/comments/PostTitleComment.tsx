@@ -1,4 +1,4 @@
-import { convertTime } from "@/utils/clientUtils";
+import { getFormattedTime } from "@/utils/formatTime";
 
 interface PostTitleCommentProps {
     title: string;
@@ -13,7 +13,7 @@ const PostTitleComment = ({ title, content, username, time }: PostTitleCommentPr
             <h1 className="text-xl text-white pb-2 px-4">{title}</h1>
             <p className="text-md text-white pb-2 px-4">{content}</p>
             <p className="text-sm text-pink-400 px-4">
-                Posted by {username} at {convertTime(time)}{" "}
+                Posted by {username} at {getFormattedTime(time)}{" "}
             </p>
         </div>
     );

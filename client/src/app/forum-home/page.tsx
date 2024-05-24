@@ -2,7 +2,6 @@
 
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import DeleteAccountButton from "@/components/buttons/DeleteAccountButton";
-// import LogoutButton from "@/components/buttons/LogoutButton";
 import NavBar from "@/components/nav/NavBar";
 import Post from "@/components/posts/Post";
 import axios from "axios";
@@ -31,11 +30,7 @@ const ForumHomePage = () => {
 
     const onClickDeleteAccount = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/auth", {
-                headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-                },
-            });
+            const res = await axios.get("http://localhost:5000/auth");
 
             if (res.status == 200) {
                 router.push("/delete-account");
@@ -47,11 +42,7 @@ const ForumHomePage = () => {
 
     const onClickLogout = async () => {
         try {
-            const res = await axios.post("http://localhost:5000/logout", {
-                headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-                },
-            });
+            const res = await axios.post("http://localhost:5000/logout");
 
             if (res.status == 200) {
                 window.localStorage.removeItem("token");
