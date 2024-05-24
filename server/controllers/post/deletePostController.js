@@ -6,7 +6,7 @@ const deletePost = async (req, res) => {
     const { postId } = req.params;
     const { username } = req.body;
 
-    const foundPost = await post.findOne({ postId: postId });
+    const foundPost = await post.findOne({ postId });
 
     if (!foundPost) {
         return res.status(404).json({ message: "Post not found." });
@@ -19,7 +19,7 @@ const deletePost = async (req, res) => {
     }
 
     await post.deleteOne({ postId });
-    await comment.deleteMany({ postId });
+    await comment.deleteMany({ postId: postId });
     return res.status(200).json({ message: "Post deleted successfully." });
 };
 

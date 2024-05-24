@@ -20,6 +20,7 @@ const deletePostRoute = require("./routes/post/deletePostRoute");
 const getPostRoute = require("./routes/post/getPostRoute");
 const createCommentRoute = require("./routes/comment/createCommentRoute");
 const getCommentRoute = require("./routes/comment/getCommentRoute");
+const deleteCommentRoute = require("./routes/comment/deleteCommentRoute");
 const logoutRoute = require("./routes/user/logoutRoute");
 
 app.use(signupRoute);
@@ -31,6 +32,7 @@ app.use(deletePostRoute);
 app.use(getPostRoute);
 app.use(createCommentRoute);
 app.use(getCommentRoute);
+app.use(deleteCommentRoute);
 app.use(logoutRoute);
 
 app.get("/auth", authenticateToken, (req, res) => {
