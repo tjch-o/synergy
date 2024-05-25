@@ -6,7 +6,7 @@ interface GoBackButtonProps {
 
 const GoBackButton = ({ onClick }: GoBackButtonProps) => {
     return (
-        <div className="hover:opacity-50">
+        <div className="mx-4 hover:opacity-50">
             <button className="bg-[#603fef] py-2 px-4 rounded text-white" onClick={onClick}>
                 <ArrowLeftIcon fontSize="medium" />
                 Return to forum
