@@ -62,7 +62,11 @@ const ForumHomePage = () => {
                 <Image src="/bg.jpg" alt="bg" layout="fill" objectFit="cover" />
             </div>
             <div className="relative">
-                <NavBar username={username} onLogout={onClickLogout} />
+                <NavBar
+                    username={username}
+                    onDeleteAccount={onClickDeleteAccount}
+                    onLogout={onClickLogout}
+                />
                 <h1 className="text-3xl text-center m-8 text-white">Discussion Posts</h1>
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
@@ -86,7 +90,7 @@ const ForumHomePage = () => {
                     )}
                 </div>
                 <div>
-                    {token ? <DeleteAccountButton onClick={onClickDeleteAccount} /> : null}
+                    {/* {token ? <DeleteAccountButton onClick={onClickDeleteAccount} /> : null} */}
 
                     {token ? <CreatePostButton onClick={onClickCreatePost} /> : null}
                 </div>

@@ -1,5 +1,4 @@
 import { getFormattedTime } from "@/utils/formatTime";
-import Image from "next/image";
 
 import DeletePostButton from "../buttons/DeletePostButton";
 import LikeButton from "../buttons/LikeButton";
@@ -37,7 +36,7 @@ const Post = ({
                     {`Posted by ${username} on ${getFormattedTime(time)}`}
                 </p>
                 <div className="flex flex-row">
-                    <LikeButton likeCount={likeCount} />
+                    {/* <LikeButton likeCount={likeCount} /> */}
                     <ViewCommentsButton commentCount={commentCount} postId={postId} />
                     <div className="ml-auto">
                         <DeletePostButton isOwner={isOwner} postId={postId} />

@@ -1,3 +1,4 @@
+import Delete from "@mui/icons-material/Delete";
 import Logout from "@mui/icons-material/Logout";
 import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -12,10 +13,11 @@ import * as React from "react";
 
 interface AccountMenuProps {
     username: string;
+    onDeleteAccount: () => void;
     onLogout: () => void;
 }
 
-const AccountMenu = ({ username, onLogout }: AccountMenuProps) => {
+const AccountMenu = ({ username, onDeleteAccount, onLogout }: AccountMenuProps) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -28,6 +30,11 @@ const AccountMenu = ({ username, onLogout }: AccountMenuProps) => {
     const handleLogout = () => {
         handleClose();
         onLogout();
+    };
+
+    const handleDeleteAccount = () => {
+        handleClose();
+        onDeleteAccount();
     };
 
     return (
@@ -95,10 +102,13 @@ const AccountMenu = ({ username, onLogout }: AccountMenuProps) => {
                 <MenuItem onClick={handleClose}>
                     <Avatar /> Profile
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
-                    <Avatar /> My account
-                </MenuItem>
                 <Divider />
+                <MenuItem onClick={handleDeleteAccount}>
+                    <ListItemIcon>
+                        <Delete fontSize="small" />
+                    </ListItemIcon>
+                    Delete Account
+                </MenuItem>
                 <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />

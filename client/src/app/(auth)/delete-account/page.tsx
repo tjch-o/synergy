@@ -3,6 +3,7 @@
 import FailureAlert from "@/components/alerts/FailureAlert";
 import SuccessAlert from "@/components/alerts/SuccessAlert";
 import DeleteAccountButton from "@/components/buttons/DeleteAccountButton";
+import GoBackButton from "@/components/buttons/GoBackButton";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -52,6 +53,10 @@ const DeleteAccountPage = () => {
         }
     };
 
+    const handleGoBack = () => {
+        router.push("/forum-home");
+    };
+
     return (
         <div>
             <div className="relative flex justify-center items-center h-screen z-10">
@@ -67,8 +72,9 @@ const DeleteAccountPage = () => {
                             required
                         />
 
-                        <div className="ml-4 mb-4">
+                        <div className="flex ml-4 mb-4 space-x-4">
                             <DeleteAccountButton onClick={handleSubmit} />
+                            <GoBackButton onClick={handleGoBack} />
                         </div>
 
                         {deleteAccountStatus ? (
