@@ -37,6 +37,7 @@ const CreatePostPage = () => {
             ...postData,
             username: username,
             time: Date.now(),
+            likes: [],
             likeCount: 0,
             commentCount: 0,
             comments: [],

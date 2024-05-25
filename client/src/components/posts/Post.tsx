@@ -13,6 +13,8 @@ interface PostProps {
     likeCount: number;
     commentCount: number;
     isOwner: boolean;
+    likeStatus: boolean;
+    onClickLike: () => void;
 }
 
 const Post = ({
@@ -24,6 +26,8 @@ const Post = ({
     likeCount,
     commentCount,
     isOwner,
+    likeStatus,
+    onClickLike,
 }: PostProps) => {
     return (
         <div className="max-w-sm rounded-md overflow-hidden text-sky-200 border-2 border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]">
@@ -36,7 +40,7 @@ const Post = ({
                     {`Posted by ${username} on ${getFormattedTime(time)}`}
                 </p>
                 <div className="flex flex-row">
-                    {/* <LikeButton likeCount={likeCount} /> */}
+                    <LikeButton likeCount={likeCount} status={likeStatus} onClick={onClickLike} />
                     <ViewCommentsButton commentCount={commentCount} postId={postId} />
                     <div className="ml-auto">
                         <DeletePostButton isOwner={isOwner} postId={postId} />

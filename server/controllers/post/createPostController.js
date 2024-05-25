@@ -3,7 +3,7 @@ const post = require("../../models/post");
 const getUserId = require("../../utils/getUserId");
 
 const createPost = async (req, res) => {
-    const { title, content, username, time, likeCount, commentCount, comments } = req.body;
+    const { title, content, username, time, likes, likeCount, commentCount, comments } = req.body;
 
     const postId = uuid.v4();
     const userId = await getUserId(username);
@@ -14,6 +14,7 @@ const createPost = async (req, res) => {
         content: content,
         userId: userId,
         time: time,
+        likes: likes,
         likeCount: likeCount,
         commentCount: commentCount,
         comments: comments,
