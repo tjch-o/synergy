@@ -1,7 +1,6 @@
 "use client";
 
 import CreatePostButton from "@/components/buttons/CreatePostButton";
-import DeleteAccountButton from "@/components/buttons/DeleteAccountButton";
 import NavBar from "@/components/nav/NavBar";
 import Post from "@/components/posts/Post";
 import axios from "axios";
@@ -11,7 +10,6 @@ import { useEffect, useState } from "react";
 
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
-    const [likeStatus, setLikeStatus] = useState(false);
     const token = window.localStorage.getItem("token");
     const username = window.localStorage.getItem("username");
     const router = useRouter();
@@ -57,34 +55,6 @@ const ForumHomePage = () => {
         }
     };
 
-    const onClickLike = async (postId) => {
-        if (likeStatus == false) {
-            try {
-                const res = await axios.post(`http://localhost:5000/post/like/${postId}`, {
-                    username: username,
-                });
-
-                if (res.status == 200) {
-                    setLikeStatus(true);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            try {
-                const res = await axios.delete(`http://localhost:5000/post/like/${postId}`, {
-                    data: { username: username },
-                });
-
-                if (res.status == 200) {
-                    setLikeStatus(false);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    };
-
     return (
         <div className="bg-fixed bg-center bg-cover h-screen">
             <div className="fixed inset-0">
@@ -100,6 +70,7 @@ const ForumHomePage = () => {
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
                         posts.map((post, index) => {
+                            const status = post.likedUsers && post.likedUsers.includes(username);
                             return (
                                 <Post
                                     key={index}
@@ -111,8 +82,7 @@ const ForumHomePage = () => {
                                     commentCount={post.commentCount}
                                     postId={post.postId}
                                     isOwner={post.username == username}
-                                    likeStatus={likeStatus}
-                                    onClickLike={() => onClickLike(post.postId)}
+                                    likeStatus={status}
                                 />
                             );
                         })
@@ -120,11 +90,7 @@ const ForumHomePage = () => {
                         <p className="flex items-center text-white"> Please login to see posts. </p>
                     )}
                 </div>
-                <div>
-                    {/* {token ? <DeleteAccountButton onClick={onClickDeleteAccount} /> : null} */}
-
-                    {token ? <CreatePostButton onClick={onClickCreatePost} /> : null}
-                </div>
+                <div>{token ? <CreatePostButton onClick={onClickCreatePost} /> : null}</div>
             </div>
         </div>
     );

@@ -6,6 +6,10 @@ const likePost = async (req, res) => {
     const { username } = req.body;
 
     try {
+        if (!username) {
+            return res.status(400).json({ message: "Username is required" });
+        }
+
         const foundPost = await post.findOne({ postId });
         const userId = await getUserId(username);
 
