@@ -12,7 +12,7 @@ const PostTitleComment = ({ title, content, username, time }: PostTitleCommentPr
         <div className="inline-block min-w-max max-w-full rounded opacity-75 bg-blue-700 py-4 my-4">
             <h1 className="text-xl text-white pb-2 px-4">{title}</h1>
             <p className="text-md text-white pb-2 px-4">{content}</p>
-            <p className="text-sm text-pink-400 px-4">
+            <p className="text-sm text-cyan-400 px-4">
                 Posted by {username} at {getFormattedTime(time)}{" "}
             </p>
         </div>

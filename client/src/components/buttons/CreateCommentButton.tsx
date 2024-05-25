@@ -11,7 +11,7 @@ const CreateCommentButton = ({ isVisible, onClick }: CreateCommentButtonProps) =
             {isVisible ? (
                 <button
                     className="py-2 px-4 rounded text-white"
-                    style={{ color: "#000" }}
+                    style={{ color: "#ffffff" }}
                     onClick={onClick}
                 >
                     <AddCircleIcon fontSize="large" />

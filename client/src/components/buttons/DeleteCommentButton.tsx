@@ -2,18 +2,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
-interface DeletePostButtonProps {
+interface DeleteCommentButtonProps {
     isOwner: boolean;
-    postId: string;
+    commentId: string;
 }
 
-const DeletePostButton = ({ isOwner, postId }: DeletePostButtonProps) => {
+const DeleteCommentButton = ({ isOwner, commentId }: DeleteCommentButtonProps) => {
     const handleDeletePost = async () => {
         try {
-            const res = await axios.delete(`http://localhost:5000/post/${postId}`, {
-                headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-                },
+            const res = await axios.delete(`http://localhost:5000/comment/${commentId}`, {
                 data: { username: window.localStorage.getItem("username") },
             });
 
@@ -28,12 +25,12 @@ const DeletePostButton = ({ isOwner, postId }: DeletePostButtonProps) => {
     };
 
     return isOwner ? (
-        <div className="text-sky-200 flex flex-row">
-            <Button onClick={handleDeletePost} sx={{ color: "#c0e8e8" }}>
+        <div className="text-white">
+            <Button onClick={handleDeletePost} sx={{ color: "#fff" }}>
                 <DeleteIcon fontSize="medium" />
             </Button>
         </div>
     ) : null;
 };
 
-export default DeletePostButton;
+export default DeleteCommentButton;
