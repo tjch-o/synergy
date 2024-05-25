@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
+    const [likeStatus, setLikeStatus] = useState(false);
     const token = window.localStorage.getItem("token");
     const username = window.localStorage.getItem("username");
     const router = useRouter();
@@ -56,6 +57,34 @@ const ForumHomePage = () => {
         }
     };
 
+    const onClickLike = async (postId) => {
+        if (likeStatus == false) {
+            try {
+                const res = await axios.post(`http://localhost:5000/post/like/${postId}`, {
+                    username: username,
+                });
+
+                if (res.status == 200) {
+                    setLikeStatus(true);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            try {
+                const res = await axios.delete(`http://localhost:5000/post/like/${postId}`, {
+                    data: { username: username },
+                });
+
+                if (res.status == 200) {
+                    setLikeStatus(false);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
     return (
         <div className="bg-fixed bg-center bg-cover h-screen">
             <div className="fixed inset-0">
@@ -78,6 +107,8 @@ const ForumHomePage = () => {
                                     commentCount={post.commentCount}
                                     postId={post.postId}
                                     isOwner={post.username == username}
+                                    likeStatus={likeStatus}
+                                    onClickLike={() => onClickLike(post.postId)}
                                 />
                             );
                         })
