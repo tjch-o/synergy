@@ -5,6 +5,7 @@ import SuccessAlert from "@/components/alerts/SuccessAlert";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import GoBackButton from "@/components/buttons/GoBackButton";
 import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
@@ -68,40 +69,48 @@ const CreatePostPage = () => {
 
     return (
         <div>
-            <h1 className="text-3xl pb-8">Create Post Page</h1>
+            <div className="relative flex justify-center items-center h-screen z-10">
+                <div className="w-1/3 rounded overflow-hidden border-2 border-purple-600 hover:scale-110 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#8A05BE,0_0_15px_#8A05BE,0_0_30px_#8A05BE]">
+                    <form onSubmit={handleSubmit}>
+                        <label className="block font-bold text-white mt-4 ml-4">Title</label>
+                        <input
+                            className="block mt-2 ml-4 mb-4 w-2/3 h-8"
+                            name="title"
+                            type="text"
+                            onChange={handleChangeInData}
+                            required
+                        ></input>
 
-            <form onSubmit={handleSubmit}>
-                <label className="block font-bold">Title</label>
-                <input
-                    className="block mt-2 mb-4 w-1/2 h-8"
-                    name="title"
-                    type="text"
-                    onChange={handleChangeInData}
-                    required
-                ></input>
+                        <label className="block font-bold text-white ml-4">Content</label>
+                        <input
+                            className="block mt-2 ml-4 mb-4 w-2/3 h-8"
+                            name="content"
+                            type="textarea"
+                            onChange={handleChangeInData}
+                            required
+                        ></input>
 
-                <label className="block font-bold">Content</label>
-                <input
-                    className="block mt-2 mb-4 w-1/2 h-8"
-                    name="content"
-                    type="textarea"
-                    onChange={handleChangeInData}
-                    required
-                ></input>
+                        <div className="flex flex-row justify-center space-x-8 mt-4 mb-4">
+                            <CreatePostButton onClick={handleSubmit} />
+                            <GoBackButton onClick={handleGoBack} />
+                        </div>
 
-                <div className="flex flex-row">
-                    <CreatePostButton onClick={handleSubmit} />
-                    <GoBackButton onClick={handleGoBack} />
+                        <div className="flex justify-center items-center">
+                        {createPostStatus ? (
+                        isAlertVisible ? (
+                            <SuccessAlert message={message} />
+                        ) : null
+                    ) : isAlertVisible ? (
+                        <FailureAlert message={message} />
+                    ) : null}
+                        </div>
+                    </form>  
                 </div>
-            </form>
+            </div>
 
-            {createPostStatus ? (
-                isAlertVisible ? (
-                    <SuccessAlert message={message} />
-                ) : null
-            ) : isAlertVisible ? (
-                <FailureAlert message={message} />
-            ) : null}
+            <div className="absolute inset-0 z-0">
+                <Image src="/post.jpg" alt="signup" layout="fill" objectFit="cover" />
+            </div>
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import Delete from "@mui/icons-material/Delete";
 import Logout from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
 import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -55,7 +56,9 @@ const AccountMenu = ({ username, onDeleteAccount, onLogout }: AccountMenuProps) 
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                        <Avatar variant="rounded" sx={{ width: 32, height: 32 }}>
+                            <PersonIcon />
+                        </Avatar>
                     </IconButton>
                 </Tooltip>
                 <Typography
