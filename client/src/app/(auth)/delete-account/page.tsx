@@ -73,7 +73,7 @@ const DeleteAccountPage = () => {
                         />
 
                         <div className="flex ml-4 mb-4 space-x-4">
-                            <DeleteAccountButton onClick={handleSubmit} />
+                            <DeleteAccountButton onClick={() => handleSubmit} />
                             <GoBackButton onClick={handleGoBack} />
                         </div>
 
