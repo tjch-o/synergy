@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import * as React from "react";
 
 interface AccountMenuProps {
-    username: string;
+    username: string | null;
     onDeleteAccount: () => void;
     onLogout: () => void;
 }

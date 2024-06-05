@@ -2,7 +2,7 @@ import NavBarLogo from "../logos/NavBarLogo";
 import AccountMenu from "../menus/AccountMenu";
 
 interface NavBarProps {
-    username: string;
+    username: string | null;
     onDeleteAccount: () => void;
     onLogout: () => void;
 }
