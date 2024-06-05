@@ -91,7 +91,7 @@ const CreatePostPage = () => {
                         ></input>
 
                         <div className="flex flex-row justify-center space-x-8 mt-4 mb-4">
-                            <CreatePostButton onClick={handleSubmit} />
+                            <CreatePostButton onClick={() => handleSubmit} />
                             <GoBackButton onClick={handleGoBack} />
                         </div>
 

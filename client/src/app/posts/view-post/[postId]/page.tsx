@@ -24,7 +24,7 @@ const ViewPostPage = () => {
         time: "",
         comments: [],
     });
-    const [commentData, setCommentData] = useState([]);
+    const [commentData, setCommentData] = useState<any[]>([]);
     const [isCreateCommentButtonVisible, setCreateCommentButtonVisible] = useState(true);
     const [isCreateCommentSectionVisible, setCreateCommentSectionVisible] = useState(false);
     const [newComment, setNewComment] = useState("");
@@ -109,7 +109,7 @@ const ViewPostPage = () => {
         } catch (error) {
             setAlertVisible(true);
             setAlertType(false);
-            setMessage(error.message);
+            console.log(error);
         }
     };
 
@@ -128,7 +128,7 @@ const ViewPostPage = () => {
                     />
                 </div>
 
-                {commentData.map((comment, index) => {
+                {commentData.map((comment: any, index) => {
                     const pos = comment.username == username ? "justify-end" : "justify-start";
                     const className = `flex ${pos}`;
                     return (
