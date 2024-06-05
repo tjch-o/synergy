@@ -15,7 +15,7 @@ const DeleteAccountPage = () => {
     const [deleteAccountStatusMsg, setDeleteAccountStatusMsg] = useState("");
     const [isDeleteAccountStatusVisible, setDeleteAccountStatusVisible] = useState(false);
 
-    const username = window.localStorage.getItem("username");
+    const username = typeof window != "undefined" ? window.localStorage.getItem("username") : null;
     const router = useRouter();
 
     const handleChangeInPassword = (event: ChangeEvent<HTMLInputElement>) => {

@@ -15,7 +15,7 @@ const CreatePostPage = () => {
     const [message, setMessage] = useState("");
 
     const router = useRouter();
-    const username = window.localStorage.getItem("username");
+    const username = typeof window != "undefined" ? window.localStorage.getItem("username") : null;
 
     const [postData, setPostData] = useState({
         title: "",
@@ -96,15 +96,15 @@ const CreatePostPage = () => {
                         </div>
 
                         <div className="flex justify-center items-center">
-                        {createPostStatus ? (
-                        isAlertVisible ? (
-                            <SuccessAlert message={message} />
-                        ) : null
-                    ) : isAlertVisible ? (
-                        <FailureAlert message={message} />
-                    ) : null}
+                            {createPostStatus ? (
+                                isAlertVisible ? (
+                                    <SuccessAlert message={message} />
+                                ) : null
+                            ) : isAlertVisible ? (
+                                <FailureAlert message={message} />
+                            ) : null}
                         </div>
-                    </form>  
+                    </form>
                 </div>
             </div>
 

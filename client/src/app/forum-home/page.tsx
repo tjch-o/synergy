@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
     const token = window.localStorage.getItem("token");
-    const username = window.localStorage.getItem("username");
+    const username = typeof window != "undefined" ? window.localStorage.getItem("username") : null;
     const router = useRouter();
 
     const fetchPostsData = async () => {

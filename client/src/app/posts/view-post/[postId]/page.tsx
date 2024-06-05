@@ -15,7 +15,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 const ViewPostPage = () => {
     const urlParams = useParams();
     const postId = urlParams.postId;
-    const username = localStorage.getItem("username");
+    const username = typeof window != "undefined" ? localStorage.getItem("username") : null;
 
     const [postData, setPostData] = useState({
         title: "",
