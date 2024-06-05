@@ -101,7 +101,7 @@ const LoginPage = () => {
                             required
                         />
 
-                        <LoginButton onClick={handleSubmit} disabled={buttonDisabled} />
+                        <LoginButton onClick={() => handleSubmit} disabled={buttonDisabled} />
 
                         {loginStatus ? (
                             isLoginStatusVisible ? (
