@@ -69,7 +69,7 @@ const ForumHomePage = () => {
                 <h1 className="text-3xl text-center m-8 text-white">Discussion Posts</h1>
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
-                        posts.map((post, index) => {
+                        posts.map((post: any, index) => {
                             const status = post.likedUsers && post.likedUsers.includes(username);
                             return (
                                 <Post
