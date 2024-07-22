@@ -16,6 +16,10 @@ const ViewPostPage = () => {
     const urlParams = useParams();
     const postId = urlParams.postId;
     const username = localStorage.getItem("username");
+    const token = window.localStorage.getItem("token");
+    if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
 
     const [postData, setPostData] = useState({
         title: "",

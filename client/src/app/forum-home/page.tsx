@@ -11,6 +11,10 @@ import { useEffect, useState } from "react";
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
     const token = window.localStorage.getItem("token");
+    if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+
     const username = window.localStorage.getItem("username");
     const router = useRouter();
 
