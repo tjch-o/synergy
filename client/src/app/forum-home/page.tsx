@@ -6,10 +6,15 @@ import Post from "@/components/posts/Post";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
+import { sortByProperty } from "@/utils/sort";
+import SortMenu from "@/components/menus/SortMenu"
+import { Sort } from "@mui/icons-material";
 
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
+    const [sortProperty, setSortProperty] = useState("");
+
     const token = window.localStorage.getItem("token");
     if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -20,6 +25,9 @@ const ForumHomePage = () => {
 
     const fetchPostsData = async () => {
         const res = await axios.get("http://localhost:5000/forum-posts");
+        if (sortProperty != "") {
+            res.data.posts = sortByProperty(res.data.posts, sortProperty);
+        }
         setPosts(res.data.posts);
     };
 
@@ -94,7 +102,12 @@ const ForumHomePage = () => {
                         <p className="flex items-center text-white"> Please login to see posts. </p>
                     )}
                 </div>
-                <div>{token ? <CreatePostButton onClick={onClickCreatePost} /> : null}</div>
+
+                    {token ? <div className="flex justify-center items-center space-x-8">
+                        <CreatePostButton onClick={onClickCreatePost} />
+                        <SortMenu setSortProperty={setSortProperty}/>
+                        </div>
+                    : null}
             </div>
         </div>
     );
