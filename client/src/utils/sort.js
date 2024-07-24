@@ -13,4 +13,4 @@ const sortByProperty = (arr, property) => {
     });
 };
 
-export { sortByProperty}
+export { sortByProperty };

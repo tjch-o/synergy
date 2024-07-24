@@ -96,15 +96,15 @@ const CreatePostPage = () => {
                         </div>
 
                         <div className="flex justify-center items-center">
-                        {createPostStatus ? (
-                        isAlertVisible ? (
-                            <SuccessAlert message={message} />
-                        ) : null
-                    ) : isAlertVisible ? (
-                        <FailureAlert message={message} />
-                    ) : null}
+                            {createPostStatus ? (
+                                isAlertVisible ? (
+                                    <SuccessAlert message={message} />
+                                ) : null
+                            ) : isAlertVisible ? (
+                                <FailureAlert message={message} />
+                            ) : null}
                         </div>
-                    </form>  
+                    </form>
                 </div>
             </div>
 
