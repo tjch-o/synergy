@@ -8,6 +8,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, ChangeEvent } from "react";
 import { sortByProperty } from "@/utils/sort";
+import SortMenu from "@/components/menus/SortMenu"
+import { Sort } from "@mui/icons-material";
 
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
@@ -100,15 +102,12 @@ const ForumHomePage = () => {
                         <p className="flex items-center text-white"> Please login to see posts. </p>
                     )}
                 </div>
-                <div>{token ? <CreatePostButton onClick={onClickCreatePost} /> : null}</div>
-                <div>
-                    <select onChange={(e: ChangeEvent<HTMLSelectElement>) => setSortProperty(e.target.value)}>
-                        <option value="">Sort by</option>
-                        <option value="time">Time</option>
-                        <option value="likeCount">Likes</option>
-                        <option value="commentCount">Comments</option>
-                    </select>
-                </div>
+
+                    {token ? <div className="flex justify-center items-center space-x-8">
+                        <CreatePostButton onClick={onClickCreatePost} />
+                        <SortMenu setSortProperty={setSortProperty}/>
+                        </div>
+                    : null}
             </div>
         </div>
     );
