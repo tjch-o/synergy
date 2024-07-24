@@ -6,10 +6,13 @@ import Post from "@/components/posts/Post";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
+import { sortByProperty } from "@/utils/sort";
 
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
+    const [sortProperty, setSortProperty] = useState("");
+
     const token = window.localStorage.getItem("token");
     if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -20,6 +23,9 @@ const ForumHomePage = () => {
 
     const fetchPostsData = async () => {
         const res = await axios.get("http://localhost:5000/forum-posts");
+        if (sortProperty != "") {
+            res.data.posts = sortByProperty(res.data.posts, sortProperty);
+        }
         setPosts(res.data.posts);
     };
 
@@ -95,6 +101,14 @@ const ForumHomePage = () => {
                     )}
                 </div>
                 <div>{token ? <CreatePostButton onClick={onClickCreatePost} /> : null}</div>
+                <div>
+                    <select onChange={(e: ChangeEvent<HTMLSelectElement>) => setSortProperty(e.target.value)}>
+                        <option value="">Sort by</option>
+                        <option value="time">Time</option>
+                        <option value="likeCount">Likes</option>
+                        <option value="commentCount">Comments</option>
+                    </select>
+                </div>
             </div>
         </div>
     );
