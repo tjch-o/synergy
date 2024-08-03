@@ -3,11 +3,16 @@ require("dotenv").config();
 const cors = require("cors");
 const database = require("./database");
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const authenticateToken = require("./middleware/authenticateToken");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 app.use(express.json());
+app.use(cookieParser());
 
 const port = 5000;
 

@@ -7,6 +7,7 @@ import Post from "@/components/posts/Post";
 import { sortByProperty } from "@/utils/sort";
 import { Sort } from "@mui/icons-material";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -15,16 +16,21 @@ const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
     const [sortProperty, setSortProperty] = useState("");
 
-    const token = window.localStorage.getItem("token");
-    if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
+    // const token = window.localStorage.getItem("token");
+    // if (token) {
+    //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    // }
+    const token = Cookies.get("token");
 
-    const username = window.localStorage.getItem("username");
+    // const username = window.localStorage.getItem("username");
+    const username = Cookies.get("username");
     const router = useRouter();
 
     const fetchPostsData = async () => {
-        const res = await axios.get("http://localhost:5000/forum-posts");
+        const res = await axios.get("http://localhost:5000/forum-posts", {
+            withCredentials: true,
+        });
+
         if (sortProperty != "") {
             res.data.posts = sortByProperty(res.data.posts, sortProperty);
         }
@@ -40,15 +46,16 @@ const ForumHomePage = () => {
     };
 
     const onClickDeleteAccount = async () => {
-        try {
-            const res = await axios.get("http://localhost:5000/auth");
+        // try {
+        //     const res = await axios.get("http://localhost:5000/auth");
 
-            if (res.status == 200) {
-                router.push("/delete-account");
-            }
-        } catch (error) {
-            console.log(error);
-        }
+        //     if (res.status == 200) {
+        //         router.push("/delete-account");
+        //     }
+        // } catch (error) {
+        //     console.log(error);
+        // }
+        router.push("/delete-account");
     };
 
     const onClickLogout = async () => {
@@ -56,8 +63,10 @@ const ForumHomePage = () => {
             const res = await axios.post("http://localhost:5000/logout");
 
             if (res.status == 200) {
-                window.localStorage.removeItem("token");
-                window.localStorage.removeItem("username");
+                // window.localStorage.removeItem("token");
+                // window.localStorage.removeItem("username");
+                Cookies.remove("token");
+                Cookies.remove("username");
                 router.push("/login");
             } else {
                 console.log(res);

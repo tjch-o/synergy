@@ -7,6 +7,7 @@ import GoBackButton from "@/components/buttons/GoBackButton";
 import Comment from "@/components/comments/Comment";
 import PostTitleComment from "@/components/comments/PostTitleComment";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
@@ -15,11 +16,12 @@ import { ChangeEvent, useEffect, useState } from "react";
 const ViewPostPage = () => {
     const urlParams = useParams();
     const postId = urlParams.postId;
-    const username = localStorage.getItem("username");
-    const token = window.localStorage.getItem("token");
-    if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
+    // const username = localStorage.getItem("username");
+    // const token = window.localStorage.getItem("token");
+    // if (token) {
+    //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    // }
+    const username = Cookies.get("username");
 
     const [postData, setPostData] = useState({
         title: "",
@@ -40,7 +42,9 @@ const ViewPostPage = () => {
     const className = `flex ${pos} mx-4`;
 
     const getPostData = async () => {
-        const res = await axios.get(`http://localhost:5000/post/${postId}`);
+        const res = await axios.get(`http://localhost:5000/post/${postId}`, {
+            withCredentials: true,
+        });
 
         if (res.status === 200) {
             setPostData(res.data.post);
@@ -56,7 +60,9 @@ const ViewPostPage = () => {
     const getCommentData = async () => {
         try {
             const promises = postData.comments.map(async (commentId) => {
-                const res = await axios.get(`http://localhost:5000/comment/${commentId}`);
+                const res = await axios.get(`http://localhost:5000/comment/${commentId}`, {
+                    withCredentials: true,
+                });
                 return res;
             });
 
@@ -95,6 +101,7 @@ const ViewPostPage = () => {
 
             const res = await axios.post(`http://localhost:5000/comment`, data, {
                 validateStatus: (status) => status >= 200 && status <= 500,
+                withCredentials: true,
             });
 
             if (res.status == 200) {
