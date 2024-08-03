@@ -3,13 +3,14 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 const authenticateToken = (req, res, next) => {
-    const { authorization } = req.headers;
+    // const { authorization } = req.headers;
 
-    if (!authorization) {
-        return res.status(401).json({ error: "Authorisation token required" });
-    }
+    // if (!authorization) {
+    //     return res.status(401).json({ error: "Authorisation token required" });
+    // }
 
-    const token = authorization.split(" ")[1];
+    // const token = authorization.split(" ")[1];
+    const token = req.cookies.token;
 
     if (token) {
         jwt.verify(token, process.env.SECRET, (err, user) => {

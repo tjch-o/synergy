@@ -4,6 +4,7 @@ import FailureAlert from "@/components/alerts/FailureAlert";
 import SuccessAlert from "@/components/alerts/SuccessAlert";
 import LoginButton from "@/components/buttons/LoginButton";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -44,9 +45,11 @@ const LoginPage = () => {
                 setLoginAttempts(maxAttempts);
                 setButtonDisabled(false);
 
-                window.localStorage.setItem("token", res.data.token);
-                window.localStorage.setItem("username", res.data.username);
-                axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+                // window.localStorage.setItem("token", res.data.token);
+                Cookies.set("token", res.data.token, { httpOnly: true });
+                Cookies.set("username", res.data.username, { httpOnly: true });
+                // window.localStorage.setItem("username", res.data.username);
+                // axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 
                 setTimeout(() => {
                     router.push("/forum-home");

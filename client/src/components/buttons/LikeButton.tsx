@@ -1,6 +1,7 @@
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useState } from "react";
 
 interface LikeButtonProps {
@@ -11,7 +12,8 @@ interface LikeButtonProps {
 
 const LikeButton = ({ postId, likeCount, status }: LikeButtonProps) => {
     const [likeStatus, setLikeStatus] = useState(status);
-    const username = localStorage.getItem("username");
+    const username = Cookies.get("username");
+    // const username = localStorage.getItem("username");
 
     const onClickLike = async (postId: string, likeStatus: boolean) => {
         if (likeStatus == false) {
@@ -21,6 +23,7 @@ const LikeButton = ({ postId, likeCount, status }: LikeButtonProps) => {
                     { username: username },
                     {
                         validateStatus: (status) => status >= 200 && status <= 500,
+                        withCredentials: true,
                     },
                 );
 

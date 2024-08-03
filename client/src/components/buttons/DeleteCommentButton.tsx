@@ -1,6 +1,7 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 interface DeleteCommentButtonProps {
     isOwner: boolean;
@@ -11,7 +12,9 @@ const DeleteCommentButton = ({ isOwner, commentId }: DeleteCommentButtonProps) =
     const handleDeletePost = async () => {
         try {
             const res = await axios.delete(`http://localhost:5000/comment/${commentId}`, {
-                data: { username: window.localStorage.getItem("username") },
+                // data: { username: window.localStorage.getItem("username") },
+                data: { username: Cookies.get("username") },
+                withCredentials: true,
             });
 
             if (res.status === 200) {

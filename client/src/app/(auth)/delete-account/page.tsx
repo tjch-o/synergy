@@ -5,6 +5,7 @@ import SuccessAlert from "@/components/alerts/SuccessAlert";
 import DeleteAccountButton from "@/components/buttons/DeleteAccountButton";
 import GoBackButton from "@/components/buttons/GoBackButton";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -15,7 +16,8 @@ const DeleteAccountPage = () => {
     const [deleteAccountStatusMsg, setDeleteAccountStatusMsg] = useState("");
     const [isDeleteAccountStatusVisible, setDeleteAccountStatusVisible] = useState(false);
 
-    const username = window.localStorage.getItem("username");
+    // const username = window.localStorage.getItem("username");
+    const username = Cookies.get("username");
     const router = useRouter();
 
     const handleChangeInPassword = (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +33,7 @@ const DeleteAccountPage = () => {
                     password,
                 },
                 validateStatus: (status) => status >= 200 && status <= 500,
+                withCredentials: true,
             });
 
             if (res.status == 200) {

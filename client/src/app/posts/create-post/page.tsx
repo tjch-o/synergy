@@ -5,6 +5,7 @@ import SuccessAlert from "@/components/alerts/SuccessAlert";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import GoBackButton from "@/components/buttons/GoBackButton";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -15,7 +16,8 @@ const CreatePostPage = () => {
     const [message, setMessage] = useState("");
 
     const router = useRouter();
-    const username = window.localStorage.getItem("username");
+    const username = Cookies.get("username");
+    // const username = window.localStorage.getItem("username");
 
     const [postData, setPostData] = useState({
         title: "",
@@ -47,6 +49,7 @@ const CreatePostPage = () => {
         try {
             const res = await axios.post("http://localhost:5000/post", data, {
                 validateStatus: (status) => status >= 200 && status <= 500,
+                withCredentials: true,
             });
 
             if (res.status == 200) {
