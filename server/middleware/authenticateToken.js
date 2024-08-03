@@ -10,6 +10,7 @@ const authenticateToken = (req, res, next) => {
     // }
 
     // const token = authorization.split(" ")[1];
+    console.log(req.cookies)
     const token = req.cookies.token;
 
     if (token) {
@@ -22,6 +23,7 @@ const authenticateToken = (req, res, next) => {
             next();
         });
     } else {
+        console.log(token)
         return res.status(403).json({ error: "No token provided" });
     }
 };

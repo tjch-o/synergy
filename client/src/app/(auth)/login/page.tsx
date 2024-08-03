@@ -46,8 +46,8 @@ const LoginPage = () => {
                 setButtonDisabled(false);
 
                 // window.localStorage.setItem("token", res.data.token);
-                Cookies.set("token", res.data.token, { httpOnly: true });
-                Cookies.set("username", res.data.username, { httpOnly: true });
+                Cookies.set("token", res.data.token);
+                Cookies.set("username", res.data.username);
                 // window.localStorage.setItem("username", res.data.username);
                 // axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 

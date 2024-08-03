@@ -46,32 +46,25 @@ const ForumHomePage = () => {
     };
 
     const onClickDeleteAccount = async () => {
-        // try {
-        //     const res = await axios.get("http://localhost:5000/auth");
-
-        //     if (res.status == 200) {
-        //         router.push("/delete-account");
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
         router.push("/delete-account");
     };
 
     const onClickLogout = async () => {
         try {
-            const res = await axios.post("http://localhost:5000/logout");
+            console.log("logging out token is ", token);
+            const res = await axios.post("http://localhost:5000/logout", {
+                withCredentials: true,
+            });
 
             if (res.status == 200) {
-                // window.localStorage.removeItem("token");
-                // window.localStorage.removeItem("username");
                 Cookies.remove("token");
                 Cookies.remove("username");
                 router.push("/login");
             } else {
                 console.log(res);
             }
-        } catch {
+        } catch (error) {
+            console.log(error)
             console.log("Failed to logout.");
         }
     };
