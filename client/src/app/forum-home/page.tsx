@@ -52,19 +52,22 @@ const ForumHomePage = () => {
     const onClickLogout = async () => {
         try {
             console.log("logging out token is ", token);
-            const res = await axios.post("http://localhost:5000/logout", {
-                withCredentials: true,
-            });
+            const res = await axios.post(
+                "http://localhost:5000/logout",
+                {},
+                {
+                    withCredentials: true,
+                },
+            );
 
             if (res.status == 200) {
-                Cookies.remove("token");
                 Cookies.remove("username");
                 router.push("/login");
             } else {
                 console.log(res);
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
             console.log("Failed to logout.");
         }
     };
