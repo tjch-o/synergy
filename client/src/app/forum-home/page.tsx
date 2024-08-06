@@ -4,8 +4,9 @@ import CreatePostButton from "@/components/buttons/CreatePostButton";
 import SortMenu from "@/components/menus/SortMenu";
 import NavBar from "@/components/nav/NavBar";
 import Post from "@/components/posts/Post";
+import SearchBar from "@/components/search-bar/SearchBar";
+import { search } from "@/utils/search";
 import { sortByProperty } from "@/utils/sort";
-import { Sort } from "@mui/icons-material";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
@@ -15,6 +16,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
     const [sortProperty, setSortProperty] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
 
     // const token = window.localStorage.getItem("token");
     // if (token) {
@@ -72,6 +74,12 @@ const ForumHomePage = () => {
         }
     };
 
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+    };
+
+    const filteredPosts = search(posts, searchQuery);
+
     return (
         <div className="bg-fixed bg-center bg-cover h-screen">
             <div className="fixed inset-0">
@@ -84,9 +92,12 @@ const ForumHomePage = () => {
                     onLogout={onClickLogout}
                 />
                 <h1 className="text-3xl text-center m-8 text-white">Discussion Posts</h1>
+                <div>
+                    <SearchBar onSearch={handleSearch} />
+                </div>
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
-                        posts.map((post, index) => {
+                        filteredPosts.map((post, index) => {
                             const status = post.likedUsers && post.likedUsers.includes(username);
                             return (
                                 <Post
