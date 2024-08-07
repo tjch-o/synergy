@@ -1,6 +1,7 @@
 "use client";
 
 import CreatePostButton from "@/components/buttons/CreatePostButton";
+import DateSelect from "@/components/date-picker/DatePicker";
 import SortMenu from "@/components/menus/SortMenu";
 import NavBar from "@/components/nav/NavBar";
 import Post from "@/components/posts/Post";
@@ -17,14 +18,13 @@ const ForumHomePage = () => {
     const [posts, setPosts] = useState([]);
     const [sortProperty, setSortProperty] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
+    const [dateQuery, setDateQuery] = useState<Date | null>(null);
 
     // const token = window.localStorage.getItem("token");
     // if (token) {
     //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     // }
     const token = Cookies.get("token");
-
-    // const username = window.localStorage.getItem("username");
     const username = Cookies.get("username");
     const router = useRouter();
 
@@ -53,7 +53,6 @@ const ForumHomePage = () => {
 
     const onClickLogout = async () => {
         try {
-            console.log("logging out token is ", token);
             const res = await axios.post(
                 "http://localhost:5000/logout",
                 {},
@@ -69,7 +68,6 @@ const ForumHomePage = () => {
                 console.log(res);
             }
         } catch (error) {
-            console.log(error);
             console.log("Failed to logout.");
         }
     };
@@ -78,7 +76,11 @@ const ForumHomePage = () => {
         setSearchQuery(query);
     };
 
-    const filteredPosts = search(posts, searchQuery);
+    const handleDateChange = (date: Date) => {
+        setDateQuery(date);
+    };
+
+    const filteredPosts = search(posts, searchQuery, dateQuery);
 
     return (
         <div className="bg-fixed bg-center bg-cover h-screen">
@@ -92,8 +94,10 @@ const ForumHomePage = () => {
                     onLogout={onClickLogout}
                 />
                 <h1 className="text-3xl text-center m-8 text-white">Discussion Posts</h1>
-                <div>
+                <div className="flex justify-center items-center space-x-8 mb-4">
                     <SearchBar onSearch={handleSearch} />
+                    <DateSelect selected={dateQuery} onSelect={handleDateChange} />
+                    <SortMenu setSortProperty={setSortProperty} />
                 </div>
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
@@ -122,7 +126,6 @@ const ForumHomePage = () => {
                 {token ? (
                     <div className="flex justify-center items-center space-x-8">
                         <CreatePostButton onClick={onClickCreatePost} />
-                        <SortMenu setSortProperty={setSortProperty} />
                     </div>
                 ) : null}
             </div>

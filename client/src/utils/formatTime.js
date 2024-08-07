@@ -2,8 +2,6 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
-// For 'Do' and other advanced formats
-
 dayjs.extend(customParseFormat);
 dayjs.extend(advancedFormat);
 
