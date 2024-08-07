@@ -1,6 +1,5 @@
 "use client";
 
-import CreatePostButton from "@/components/buttons/CreatePostButton";
 import DateSelect from "@/components/date-picker/DatePicker";
 import SortMenu from "@/components/menus/SortMenu";
 import NavBar from "@/components/nav/NavBar";
@@ -90,15 +89,18 @@ const ForumHomePage = () => {
             <div className="relative">
                 <NavBar
                     username={username}
+                    onCreatePost={onClickCreatePost}
                     onDeleteAccount={onClickDeleteAccount}
                     onLogout={onClickLogout}
                 />
                 <h1 className="text-3xl text-center m-8 text-white">Discussion Posts</h1>
-                <div className="flex justify-center items-center space-x-8 mb-4">
-                    <SearchBar onSearch={handleSearch} />
-                    <DateSelect selected={dateQuery} onSelect={handleDateChange} />
-                    <SortMenu setSortProperty={setSortProperty} />
-                </div>
+                {token ? (
+                    <div className="flex justify-center items-center space-x-8 mb-4">
+                        <SearchBar onSearch={handleSearch} />
+                        <DateSelect selected={dateQuery} onSelect={handleDateChange} />
+                        <SortMenu setSortProperty={setSortProperty} />
+                    </div>
+                ) : null}
                 <div className="grid grids-col-1 md:grids-cols-2 lg:grid-cols-4 gap-2 p-4 justify-items-stretch">
                     {token ? (
                         filteredPosts.map((post, index) => {
@@ -122,12 +124,6 @@ const ForumHomePage = () => {
                         <p className="flex items-center text-white"> Please login to see posts. </p>
                     )}
                 </div>
-
-                {token ? (
-                    <div className="flex justify-center items-center space-x-8">
-                        <CreatePostButton onClick={onClickCreatePost} />
-                    </div>
-                ) : null}
             </div>
         </div>
     );

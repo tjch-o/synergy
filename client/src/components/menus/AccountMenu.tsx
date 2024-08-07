@@ -1,6 +1,7 @@
 import Delete from "@mui/icons-material/Delete";
 import Logout from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -14,6 +15,7 @@ import * as React from "react";
 
 interface AccountMenuProps {
     username: string;
+    onCreatePost: () => void;
     onDeleteAccount: () => void;
     onLogout: () => void;
 }
@@ -106,6 +108,12 @@ const AccountMenu = ({ username, onDeleteAccount, onLogout }: AccountMenuProps) 
                     <Avatar /> Profile
                 </MenuItem>
                 <Divider />
+                <MenuItem onClick={handleDeleteAccount}>
+                    <ListItemIcon>
+                        <PostAddIcon fontSize="small" />
+                    </ListItemIcon>
+                    Create Post
+                </MenuItem>
                 <MenuItem onClick={handleDeleteAccount}>
                     <ListItemIcon>
                         <Delete fontSize="small" />
